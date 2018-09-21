@@ -16,8 +16,8 @@ public class Web {
         return this.listaEnlaces;
     }
 
-    public Character buscarPrimerCaracter() {
+    /*public Character buscarPrimerCaracter() {
         return ' ';
-    }
+    }*/
 
 }

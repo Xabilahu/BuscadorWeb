@@ -21,4 +21,7 @@ public class DiccionarioPC {
     public void insertarPalabraClave(String pPalabra){
         this.listaPalabras.add(pPalabra);
     }
+
+    //el método existe será implementado mediante el metodo contains(), que no sabemos su eficiencia (su coste)
+
 }
