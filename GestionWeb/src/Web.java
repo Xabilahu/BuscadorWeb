@@ -20,4 +20,12 @@ public class Web {
         return ' ';
     }*/
 
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public int getNumero(){
+        return this.numero;
+    }
+
 }

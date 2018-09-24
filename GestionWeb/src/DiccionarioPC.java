@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DiccionarioPC {
 
@@ -13,15 +14,30 @@ public class DiccionarioPC {
         return miDiccionarioPC;
     }
 
-    public String buscarPalabra(String pPalabra, String pAlgo){
-        return "";
-        //TODO recordar por qué hay dos parámetros
-    }
-
     public void insertarPalabraClave(String pPalabra){
         this.listaPalabras.add(pPalabra);
     }
 
-    //el método existe será implementado mediante el metodo contains(), que no sabemos su eficiencia (su coste)
+    public boolean existe(String pPalabra){
+        return listaPalabras.contains(pPalabra);
+    }
+
+    //Hace las veces de buscarPalabras()
+    public ArrayList<String> web2Words(String pNombre) {
+        Iterator<String> it = this.listaPalabras.iterator();
+        ArrayList<String> words = new ArrayList<String>();
+        String palabraClave;
+        while (it.hasNext()){
+            palabraClave = it.next();
+            if (pNombre.contains(palabraClave)) {
+            	words.add(palabraClave);
+            }
+        }
+        return words;
+    }
+
+    public Iterator<String> getIterator(){
+        return this.listaPalabras.iterator();
+    }
 
 }

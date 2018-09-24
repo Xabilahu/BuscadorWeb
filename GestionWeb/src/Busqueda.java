@@ -26,10 +26,10 @@ public class Busqueda {
 		Iterator<Web> it = this.iterador();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
-			//if(web.getNumero() == pId) {
+			if(web.getNumero() == pId) {
 				encontrado = true;
-				//url = web.getNombre;
-			//}
+				url = web.getNombre();
+			}
 		}
 	   	return url;
     }
@@ -41,10 +41,10 @@ public class Busqueda {
 		Iterator<Web> it = this.iterador();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
-			//if(web.getNombre().equals(pNombre)) {
+			if(web.getNombre().equals(pNombre)) {
 				encontrado = true;
-				//id = web.getNumero;
-			//}
+				id = web.getNumero();
+			}
 		}
 	   	return id;
     }
@@ -56,52 +56,45 @@ public class Busqueda {
 		Iterator<Web> it = this.iterador();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
-			//if(web.getNombre().equals(pNombre)) {
+			if(web.getNombre().equals(pNombre)) {
 				encontrado = true;
-				//enlacesSalientes = web.getListaEnlaces;
-			//}
+				enlacesSalientes = web.enlacesSalientes();
+			}
 		}
     	return enlacesSalientes;
     }
 
     public ArrayList<String> webOrdenada() {
-    	//ArrayList<String> webOrdenada = listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
-    	return null; //webOrdenada;
+    	ArrayList<String> webOrdenada = listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
+    	return null;
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
     	ArrayList<String> word2Webs = null;
-    	//if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {
+    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {
     		word2Webs = new ArrayList<String>();
     		Web web = null;
 			Iterator<Web> it = this.iterador();
 			while (it.hasNext()){
 				web = it.next();				
-				//if (web.getNombre().indexOf(pPalabraClave) != -1) {
-				//	word2Webs.add(web.getNombre());
-				//}				
+				if (web.getNombre().contains(pPalabraClave)) {
+					word2Webs.add(web.getNombre());
+				}
 			}
-    	//}
+    	}
     	return word2Webs;
     }
 
     public ArrayList<String> web2Words(String pNombre) {
     	ArrayList<String> web2Words = null;
     	if(string2Id(pNombre)!= -1) {
-       		//web2Words = DiccionarioPC.getDiccionarioPC().web2Words(pNombre);
-    		/*
-    		 * Metodo en Diccionario PC 
-    		  public ArrayList<String> web2Words(String pNombre) {
-				  	Iterator<Web> it = this.iterador();
-					while (it.hasNext()){					
-						//if (pNombre.indexOf(it) != -1) {
-						//	word2Webs.add(it);
-						//}				
-					}
-				}
-    		 */
+       		web2Words = DiccionarioPC.getDiccionarioPC().web2Words(pNombre);
     	} 	    	
     	return web2Words;
+    }
+
+    public Iterator<Web> getIterator(){
+        return this.listaWebs.iterator();
     }
 
     public void insertarWeb(Web pWeb){
