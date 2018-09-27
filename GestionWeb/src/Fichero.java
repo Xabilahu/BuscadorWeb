@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,9 +8,18 @@ import java.util.Scanner;
 
 public class Fichero {
 
+    private static Fichero miFichero = new Fichero();
+
+    private Fichero(){}
+
+    public static Fichero getFichero(){
+        return miFichero;
+    }
+
     public void cargarListaWeb(String pNomWeb, String pNomEnlac){
     
         try{
+            //Los archivos deben estar dentro de la carpeta GestionWeb
             Scanner entradaWeb = new Scanner(new FileReader(pNomWeb));
             Scanner entradaEnlac = new Scanner(new FileReader(pNomEnlac));
             Web wActual;
@@ -22,7 +32,7 @@ public class Fichero {
                 ArrayList<String> listaEnlaces = new ArrayList<String>();
                 int i = 2;
                 while (i < spEnlac.length){
-                    listaEnlaces.add(Busqueda.getBusqueda().id2String(Integer.parseInt(spEnlac[i])));
+                    listaEnlaces.add(spEnlac[i]);//Se guardan directamente los strings con los numeros de cada web, podríamos cambiarlo y hacer un arraylist de int(listaEnlaces)
                     i++;
                 }
                 wActual = new Web(spWeb[0], Integer.parseInt(spWeb[1]), listaEnlaces);
