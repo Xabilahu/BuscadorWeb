@@ -11,11 +11,15 @@ public class Busqueda {
         this.listaWebs = new ArrayList<Web>();
     }
 
+    public int longitud(){
+    	return this.listaWebs.size();
+	}
+
     public static Busqueda getBusqueda(){
         return miBusqueda;
     }
     
-    private Iterator<Web> iterador(){
+    public Iterator<Web> getIterator(){
     	return listaWebs.iterator();
     }
 
@@ -23,7 +27,7 @@ public class Busqueda {
     	String url = "";
        	boolean encontrado = false;
     	Web web = null;
-		Iterator<Web> it = this.iterador();
+		Iterator<Web> it = this.getIterator();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
 			if(web.getNumero() == pId) {
@@ -38,7 +42,7 @@ public class Busqueda {
         int id = -1;
     	boolean encontrado = false;
     	Web web = null;
-		Iterator<Web> it = this.iterador();
+		Iterator<Web> it = this.getIterator();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
 			if(web.getNombre().equals(pNombre)) {
@@ -53,7 +57,7 @@ public class Busqueda {
         ArrayList<String> enlacesSalientes = null;
     	boolean encontrado = false;
     	Web web = null;
-		Iterator<Web> it = this.iterador();
+		Iterator<Web> it = this.getIterator();
 		while (it.hasNext() && !encontrado ){
 			web = it.next();
 			if(web.getNombre().equals(pNombre)) {
@@ -74,7 +78,7 @@ public class Busqueda {
     	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {
     		word2Webs = new ArrayList<String>();
     		Web web = null;
-			Iterator<Web> it = this.iterador();
+			Iterator<Web> it = this.getIterator();
 			while (it.hasNext()){
 				web = it.next();				
 				if (web.getNombre().contains(pPalabraClave)) {
@@ -91,10 +95,6 @@ public class Busqueda {
        		web2Words = DiccionarioPC.getDiccionarioPC().web2Words(pNombre);
     	} 	    	
     	return web2Words;
-    }
-
-    public Iterator<Web> getIterator(){
-        return this.listaWebs.iterator();
     }
 
     public void insertarWeb(Web pWeb){
