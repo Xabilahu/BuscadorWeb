@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -5,23 +6,29 @@ import java.util.Scanner;
 public class Sistema {
 
     public static void cargarDatosFichero(){
-        Fichero.getFichero().cargarListaWeb("smallindex.txt","smallpld-arcs-1-N.txt");
-        Fichero.getFichero().cargarDiccionarioPC("words.txt");
+        Stopwatch stp = new Stopwatch();
+        Fichero.getFichero().cargarListaWeb(System.getProperty("user.dir") + File.separator +"index.txt",System.getProperty("user.dir")+File.separator+"pld-arcs-1-N.txt");
+        Fichero.getFichero().cargarDiccionarioPC(System.getProperty("user.dir") + File.separator +"words.txt");
+        System.out.println(stp.elapsedTime());
     }
 
     public static ArrayList<String> buscarWeb(){
         System.out.println("Inserte la web que quiera buscar");
         Scanner sc = new Scanner(System.in);
         String palabraClave = sc.next();
-        ArrayList<String> webs= Busqueda.getBusqueda().word2Webs(palabraClave);
-        System.out.println("Se han encontrado las siguientes webs relacionadas:");
-        sc.close();
+        Stopwatch stp = new Stopwatch();
+        ArrayList<String> webs = Busqueda.getBusqueda().word2Webs(palabraClave);
+        System.out.print("Se han encontrado las siguientes webs relacionadas:");
+        for (int i = 0; i<webs.size(); i++){
+            System.out.print(" " + webs.get(i));
+        }
+        System.out.println("\n");
+        System.out.println(stp.elapsedTime());
         return webs;
-
-
     }
 
     public static void insertarWeb(){
+        Stopwatch stp = new Stopwatch();
         System.out.print("Inserte el nombre de su web: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
@@ -40,7 +47,7 @@ public class Sistema {
         while(enlace != -1);
         Web nuevaWeb = new Web(web,id,enlaces);
         Busqueda.getBusqueda().insertarWeb(nuevaWeb);
-        sc.close();
+        System.out.println(stp.elapsedTime());
 
     }
 
@@ -48,8 +55,15 @@ public class Sistema {
         System.out.print("Introduzca la web de donde desee obtener sus enlaces: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
-        sc.close();
-        return Busqueda.getBusqueda().enlacesSalientes(web);
+        Stopwatch stp = new Stopwatch();
+        ArrayList<String> lista = Busqueda.getBusqueda().enlacesSalientes(web);
+        System.out.print("Se han encontrado las siguientes webs relacionadas:");
+        for (int i = 0; i<lista.size(); i++){
+            System.out.print(" " + lista.get(i));
+        }
+        System.out.println("\n");
+        System.out.println(stp.elapsedTime());
+        return lista;
 
     }
 
@@ -57,47 +71,52 @@ public class Sistema {
         System.out.print("1. Guardar Webs y Enlaces\n2. Guardar palabras clave del Diccionario\n\nOpci贸n: ");
         Scanner sc = new Scanner(System.in);
         int opcion = sc.nextInt();
+        Stopwatch stp = new Stopwatch();
         switch (opcion){
-            case 1: Fichero.getFichero().escribirWebs("smallindex.txt", "smallpid-arcs-1-N.txt");break;
-            case 2: Fichero.getFichero().escribirDiccionarioPC("words.txt");break;
+            case 1: Fichero.getFichero().escribirWebs("indexEscritoPrograma.txt", "pid-arcs-1-NEscritoPrograma.txt");break;
+            case 2: Fichero.getFichero().escribirDiccionarioPC("wordsEscritoPrograma.txt");break;
             default: break;
         }
+        System.out.println(stp.elapsedTime());
     }
 
     public static ArrayList<String> listaOrdenadaWebs(){
-        return Busqueda.getBusqueda().webOrdenada();
+        Stopwatch stp = new Stopwatch();
+        ArrayList<String> lista = Busqueda.getBusqueda().webOrdenada();
+        System.out.println(stp.elapsedTime());
+        return lista;
     }
 
     public static void main(String[] args){
     	ArrayList<String> lista;
     	Boolean error = false;
-    	Scanner sc = new Scanner(System.in);
+    	int opcion;
+        Scanner sc = new Scanner(System.in);
     	do {
     		if (!error) {
     			System.out.print("MENU:\n" +
 	    			"1. Cargar los datos desde los ficheros.\n" +
-	    			"2. B鷖queda de una p醙ina web\n" + 
-	    			"3. Inserci髇 de una nueva p醙ina web\n" + 
-	    			"4. Devolver las p醙inas web enlazadas desde una web dada\n"+
+	    			"2. B煤squeda de una p谩gina web\n" +
+	    			"3. Inserci贸n de una nueva p谩gina web\n" +
+	    			"4. Devolver las p谩ginas web enlazadas desde una web dada\n"+
 	    			"5. Guardar la lista de webs en ficheros\n" +
-	    			"6. Obtener una lista de p醙inas web ordenada alfab閠icamente\n" +
-	    			"7. Salir\n\n Opci髇: ");
-    		}	 
+	    			"6. Obtener una lista de p贸ginas web ordenada alfab茅ticamente\n" +
+	    			"7. Salir\n\n Opci贸n: ");
+    		}
+
+    		opcion = sc.nextInt();
     		error = false;
-	    	switch (sc.nextInt()) {
+	    	switch (opcion) {
 	    		case 1: cargarDatosFichero(); break;
 	    		case 2: buscarWeb(); break;
 	    		case 3: insertarWeb(); break;
 	    		case 4: devolverEnlaces(); break;
 	    		case 5: guardarEnFichero(); break;
-	    		case 6: lista = listaOrdenadaWebs(); break;
+	    		case 6: listaOrdenadaWebs(); break;
 	    		case 7: sc.close(); System.exit(0);
-	    		default: System.out.println("Error, introduce una opci髇 correcta"); error = true;
+	    		default: System.out.println("Error, introduce una opci贸n correcta"); error = true;
 	    	}
     	}while (true);
 
-    }
-    private static void imprimirWebs(){
-    	Busqueda.getBusqueda().webOrdenada();
     }
 }

@@ -12,8 +12,8 @@ public class FicheroTest {
 
     @org.junit.Test
     public void testCargarListaWeb() {
-        Fichero.getFichero().cargarListaWeb("smallindex.txt","smallpld-arcs-1-N.txt");
-        assertEquals(Busqueda.getBusqueda().longitud(),1000);
+        Fichero.getFichero().cargarListaWeb("index.txt","pld-arcs-1-N.txt");
+        assertEquals(Busqueda.getBusqueda().longitud(),2039805);
         assertEquals(Busqueda.getBusqueda().enlacesSalientes("010-golf.co.jp").get(2),"010bjzs.com");
 
     }
