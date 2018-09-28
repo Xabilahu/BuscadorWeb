@@ -22,7 +22,6 @@ public class DiccionarioPC {
         return listaPalabras.contains(pPalabra);
     }
 
-    //Hace las veces de buscarPalabras()
     public ArrayList<String> web2Words(String pNombre) {
         Iterator<String> it = this.listaPalabras.iterator();
         ArrayList<String> words = new ArrayList<String>();

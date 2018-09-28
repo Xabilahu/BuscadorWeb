@@ -29,10 +29,10 @@ public class Fichero {
                 lineaEnlac = entradaEnlac.nextLine();
                 String[] spWeb = lineaWeb.split("\\s+");
                 String[] spEnlac = lineaEnlac.split("\\s+");
-                ArrayList<String> listaEnlaces = new ArrayList<String>();
+                ArrayList<Integer> listaEnlaces = new ArrayList<Integer>();
                 int i = 2;
                 while (i < spEnlac.length){
-                    listaEnlaces.add(spEnlac[i]);//Se guardan directamente los strings con los numeros de cada web, podríamos cambiarlo y hacer un arraylist de int(listaEnlaces)
+                    listaEnlaces.add(Integer.parseInt(spEnlac[i]));
                     i++;
                 }
                 wActual = new Web(spWeb[0], Integer.parseInt(spWeb[1]), listaEnlaces);
@@ -62,10 +62,10 @@ public class Fichero {
             PrintWriter wrWeb = new PrintWriter(pNomWeb);
             PrintWriter wrEnlac = new PrintWriter(pNomEnlac);
             Web wActual;
-            String enlac;
+            int enlac;
             Iterator<Web> itrWeb = Busqueda.getBusqueda().getIterator();
-            Iterator<String> itrEnlac;
-            ArrayList<String> arrayEnlac;
+            Iterator<Integer> itrEnlac;
+            ArrayList<Integer> arrayEnlac;
             while (itrWeb.hasNext()){
                 wActual = itrWeb.next();
                 arrayEnlac = wActual.enlacesSalientes();

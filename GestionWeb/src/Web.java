@@ -1,24 +1,20 @@
 import java.util.ArrayList;
 
-public class Web {
+public class Web{
 
     private String nombre;
     private int numero;
-    private ArrayList<String> listaEnlaces;
+    private ArrayList<Integer> listaEnlaces;
 
-    public Web(String pNombre, int pNumero, ArrayList<String> pListaEnlaces){
+    public Web(String pNombre, int pNumero, ArrayList<Integer> pListaEnlaces){
         this.nombre = pNombre;
         this.numero = pNumero;
         this.listaEnlaces = pListaEnlaces;
     }
 
-    public ArrayList<String> enlacesSalientes() {
+    public ArrayList<Integer> enlacesSalientes() {
         return this.listaEnlaces;
     }
-
-    /*public Character buscarPrimerCaracter() {
-        return ' ';
-    }*/
 
     public String getNombre(){
         return this.nombre;

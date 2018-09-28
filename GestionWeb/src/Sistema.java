@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Sistema {
 
     public void cargarDatosFichero(){
-        //Fichero.getFichero().cargarListaWeb(nombreFicheroWebs,nombreFicheroEnlaces);
-        //Fichero.getFichero().cargarDiccionarioPC(nombreFicheroDiccionario);
+        Fichero.getFichero().cargarListaWeb("smallindex.txt","smallpld-arcs-1-N.txt");
+        Fichero.getFichero().cargarDiccionarioPC("words.txt");
     }
 
     public ArrayList<String> buscarWeb(){
@@ -22,30 +22,30 @@ public class Sistema {
     }
 
     public void insertarWeb(){
-        System.out.println("Inserte el nombre de su web");
+        System.out.print("Inserte el nombre de su web: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
-        //Int id=Busqueda.getBusqueda().getLengthWebs();
-        System.out.println("Inserte los enlaces salientes correspondientes a la web, en caso de no querer insertar ninguno," +
-                        "escriba -1 por pantalla:");
-        String enlace;
-        ArrayList<String> enlaces = null;
+        int id=Busqueda.getBusqueda().longitud();
+        System.out.print("Inserte los enlaces salientes correspondientes a la web, en caso de no querer insertar ninguno," +
+                        "escriba -1 por pantalla: ");
+        int enlace;
+        ArrayList<Integer> enlaces = null;
         do{
-            enlace = sc.next();
-            if(!enlace.equals("-1")) {
+            enlace = sc.nextInt();
+            if(enlace != -1) {
                 enlaces.add(enlace);
 
             }
         }
-        while(!enlace.equals("-1"));
-        //Web nuevaWeb = new Web(web,,enlaces);
-        Busqueda.getBusqueda().insertarWeb(null);
+        while(enlace != -1);
+        Web nuevaWeb = new Web(web,id,enlaces);
+        Busqueda.getBusqueda().insertarWeb(nuevaWeb);
         sc.close();
 
     }
 
     public ArrayList<String> devolverEnlaces(){
-        System.out.println("Introduzca la web de donde desee obtener sus enlaces");
+        System.out.print("Introduzca la web de donde desee obtener sus enlaces: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
         sc.close();
@@ -54,7 +54,14 @@ public class Sistema {
     }
 
     public void guardarEnFichero(){
-
+        System.out.print("1. Guardar Webs y Enlaces\n2. Guardar palabras clave del Diccionario\n\nOpción: ");
+        Scanner sc = new Scanner(System.in);
+        int opcion = sc.nextInt();
+        switch (opcion){
+            case 1: Fichero.getFichero().escribirWebs("smallindex.txt", "smallpid-arcs-1-N.txt");break;
+            case 2: Fichero.getFichero().escribirDiccionarioPC("words.txt");break;
+            default: break;
+        }
     }
 
     public ArrayList<String> listaOrdenadaWebs(){

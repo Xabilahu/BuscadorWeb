@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
-public class Busqueda {
+public class Busqueda{
 
     private static Busqueda miBusqueda = new Busqueda();
     private ArrayList<Web> listaWebs;
@@ -24,18 +25,7 @@ public class Busqueda {
     }
 
     public String id2String(int pId) {
-    	String url = "";
-       	boolean encontrado = false;
-    	Web web = null;
-		Iterator<Web> it = this.getIterator();
-		while (it.hasNext() && !encontrado ){
-			web = it.next();
-			if(web.getNumero() == pId) {
-				encontrado = true;
-				url = web.getNombre();
-			}
-		}
-	   	return url;
+    	return this.listaWebs.get(pId).getNombre();
     }
 
     public int string2Id(String pNombre) {
@@ -54,7 +44,10 @@ public class Busqueda {
     }
 
     public ArrayList<String> enlacesSalientes(String pNombre) {
-        ArrayList<String> enlacesSalientes = null;
+        ArrayList<String> enlacesSalientes = new ArrayList<String>();
+        ArrayList<Integer> idEnlacesSalientes = null;
+        Iterator<Integer> itr = null;
+        int enlace;
     	boolean encontrado = false;
     	Web web = null;
 		Iterator<Web> it = this.getIterator();
@@ -62,15 +55,19 @@ public class Busqueda {
 			web = it.next();
 			if(web.getNombre().equals(pNombre)) {
 				encontrado = true;
-				enlacesSalientes = web.enlacesSalientes();
+				idEnlacesSalientes = web.enlacesSalientes();
+				itr = idEnlacesSalientes.iterator();
+				while (itr.hasNext()){
+					enlace = itr.next();
+					enlacesSalientes.add(this.id2String(enlace));
+				}
 			}
 		}
     	return enlacesSalientes;
     }
 
     public ArrayList<String> webOrdenada() {
-    	ArrayList<String> webOrdenada = listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
-    	return null;
+    	return listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
