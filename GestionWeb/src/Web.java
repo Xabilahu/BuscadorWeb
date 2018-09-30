@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Web{
+public class Web implements Comparable<Web>{
 
     private String nombre;
     private int numero;
@@ -24,4 +24,8 @@ public class Web{
         return this.numero;
     }
 
+    @Override
+    public int compareTo(Web pWeb) {
+        return this.nombre.compareTo(pWeb.nombre);
+    }
 }

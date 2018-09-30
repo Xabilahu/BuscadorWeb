@@ -67,7 +67,16 @@ public class Busqueda{
     }
 
     public ArrayList<String> webOrdenada() {
-    	return listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
+        SortAndSearch ordenar = new SortAndSearch();
+        ordenar.mergeSort(this.listaWebs);
+        //ordenar.quickSort(this.listaWebs); Coste O(n^2) porque las webs están ordenadas, peor caso para qs
+        ArrayList<String> arrayURL = new ArrayList<String>();
+        Iterator<Web> itr = this.getIterator();
+        while (itr.hasNext()){
+            arrayURL.add(itr.next().getNombre());
+        }
+        return arrayURL;
+    	//return listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
