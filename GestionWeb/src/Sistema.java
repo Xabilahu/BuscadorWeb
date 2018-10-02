@@ -18,7 +18,7 @@ public class Sistema {
         String palabraClave = sc.next();
         Stopwatch stp = new Stopwatch();
         ArrayList<String> webs = Busqueda.getBusqueda().word2Webs(palabraClave);
-        System.out.print("Se han encontrado las siguientes webs relacionadas:");
+        System.out.print("Se han encontrado " + webs.size() + " webs relacionadas:");
         for (int i = 0; i<webs.size(); i++){
             System.out.print(" " + webs.get(i));
         }
@@ -96,12 +96,12 @@ public class Sistema {
     		if (!error) {
     			System.out.print("MENU:\n" +
 	    			"1. Cargar los datos desde los ficheros.\n" +
-	    			"2. Búsqueda de una página web\n" +
-	    			"3. Inserción de una nueva página web\n" +
-	    			"4. Devolver las páginas web enlazadas desde una web dada\n"+
+	    			"2. Busqueda de una pagina web\n" +
+	    			"3. Insercion de una nueva pagina web\n" +
+	    			"4. Devolver las paginas web enlazadas desde una web dada\n"+
 	    			"5. Guardar la lista de webs en ficheros\n" +
-	    			"6. Obtener una lista de póginas web ordenada alfabéticamente\n" +
-	    			"7. Salir\n\n Opción: ");
+	    			"6. Obtener una lista de paginas web ordenada alfabeticamente\n" +
+	    			"7. Salir\n\n Opcion: ");
     		}
 
     		opcion = sc.nextInt();
@@ -114,7 +114,7 @@ public class Sistema {
 	    		case 5: guardarEnFichero(); break;
 	    		case 6: listaOrdenadaWebs(); break;
 	    		case 7: sc.close(); System.exit(0);
-	    		default: System.out.println("Error, introduce una opción correcta"); error = true;
+	    		default: System.out.println("Error, introduce una opcion correcta"); error = true;
 	    	}
     	}while (true);
 
