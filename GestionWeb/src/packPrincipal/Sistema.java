@@ -34,23 +34,25 @@ public class Sistema {
     }
 
     public static void insertarWeb(){
-        Stopwatch stp = new Stopwatch();
         System.out.print("Inserte el nombre de su web: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
         int id=Busqueda.getBusqueda().longitud();
         System.out.print("Inserte los enlaces salientes correspondientes a la web, en caso de no querer insertar ninguno," +
                         "escriba -1 por pantalla: ");
-        int enlace;
-        ArrayList<Integer> enlaces = null;
+        String enlace;
+        int idEnlace;
+        ArrayList<Integer> enlaces = new ArrayList<Integer>();
         do{
-            enlace = sc.nextInt();
-            if(enlace != -1) {
-                enlaces.add(enlace);
-
+            enlace = sc.next();
+            idEnlace = Busqueda.getBusqueda().string2Id(enlace);
+            if(!enlace.equals("-1") && idEnlace != -1)  {
+                enlaces.add(idEnlace);
+                //TODO añadir mensaje URL incorrecto
             }
         }
-        while(enlace != -1);
+        while(!enlace.equals("-1"));
+        Stopwatch stp = new Stopwatch();
         Web nuevaWeb = new Web(web,id,enlaces);
         Busqueda.getBusqueda().insertarWeb(nuevaWeb);
         System.out.println(stp.elapsedTime());
