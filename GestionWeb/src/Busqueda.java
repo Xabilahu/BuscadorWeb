@@ -80,9 +80,8 @@ public class Busqueda{
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
-    	ArrayList<String> word2Webs = null;
-    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {
-    		word2Webs = new ArrayList<String>();
+    	ArrayList<String> word2Webs = new ArrayList<String>();
+    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {    	
     		Web web = null;
 			Iterator<Web> it = this.getIterator();
 			while (it.hasNext()){
@@ -96,7 +95,7 @@ public class Busqueda{
     }
 
     public ArrayList<String> web2Words(String pNombre) {
-    	ArrayList<String> web2Words = null;
+    	ArrayList<String> web2Words = new ArrayList<String>();
     	if(string2Id(pNombre)!= -1) {
        		web2Words = DiccionarioPC.getDiccionarioPC().web2Words(pNombre);
     	} 	    	
