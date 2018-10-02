@@ -1,7 +1,13 @@
+package packPrincipal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+
+import packModelo.Busqueda;
+import packModelo.Fichero;
+import packModelo.Web;
+import packTools.Stopwatch;
 
 public class Sistema {
 

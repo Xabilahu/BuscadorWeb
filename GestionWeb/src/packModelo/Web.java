@@ -1,3 +1,4 @@
+package packModelo;
 import java.util.ArrayList;
 
 public class Web implements Comparable<Web>{

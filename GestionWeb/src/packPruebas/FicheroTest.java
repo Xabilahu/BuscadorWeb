@@ -1,4 +1,9 @@
+package packPruebas;
+
 import static org.junit.Assert.*;
+
+import packModelo.Busqueda;
+import packModelo.Fichero;
 
 public class FicheroTest {
 
