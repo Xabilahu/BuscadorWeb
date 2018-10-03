@@ -46,9 +46,13 @@ public class Sistema {
         do{
             enlace = sc.next();
             idEnlace = Busqueda.getBusqueda().string2Id(enlace);
-            if(!enlace.equals("-1") && idEnlace != -1)  {
+            if(!enlace.equals("-1") && idEnlace != -1 && !enlaces.contains(idEnlace))  {
                 enlaces.add(idEnlace);
-                //TODO añadir mensaje URL incorrecto
+                System.out.print("URL correcta, vuelva a introducir otra: ");
+            } else if (!enlace.equals("-1") && idEnlace == -1){
+                System.out.print("URL incorrecta, vuelva a introducir otra: ");
+            } else if (!enlace.equals("-1") && enlaces.contains(idEnlace)){
+                System.out.print("Enlace añadido previamente, prueba con otro enlace: ");
             }
         }
         while(!enlace.equals("-1"));
