@@ -19,7 +19,7 @@ public class FicheroTest {
     public void testCargarListaWeb() {
         Fichero.getFichero().cargarListaWeb("index.txt","pld-arcs-1-N.txt");
         assertEquals(Busqueda.getBusqueda().longitud(),2039805);
-        assertEquals(Busqueda.getBusqueda().enlacesSalientes("010-golf.co.jp").get(2),"010bjzs.com");
+        assertEquals(Busqueda.getBusqueda().enlacesSalientes("010-golf.co.jp").size(),0);
 
     }
 
