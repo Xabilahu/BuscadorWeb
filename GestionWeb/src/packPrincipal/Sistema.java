@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import packModelo.Busqueda;
+import packModelo.ListaWebs;
 import packModelo.Fichero;
 import packModelo.Web;
 import packTools.Stopwatch;
@@ -23,7 +23,7 @@ public class Sistema {
         Scanner sc = new Scanner(System.in);
         String palabraClave = sc.next();
         Stopwatch stp = new Stopwatch();
-        ArrayList<String> webs = Busqueda.getBusqueda().word2Webs(palabraClave);
+        ArrayList<String> webs = ListaWebs.getListaWebs().word2Webs(palabraClave);
         System.out.print("Se han encontrado " + webs.size() + " webs relacionadas:");
         for (int i = 0; i<webs.size(); i++){
             System.out.print(" " + webs.get(i));
@@ -37,7 +37,7 @@ public class Sistema {
         System.out.print("Inserte el nombre de su web: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
-        int id=Busqueda.getBusqueda().longitud();
+        int id=ListaWebs.getListaWebs().longitud();
         System.out.print("Inserte los enlaces salientes correspondientes a la web, en caso de no querer insertar ninguno," +
                         "escriba -1 por pantalla: ");
         String enlace;
@@ -45,20 +45,23 @@ public class Sistema {
         ArrayList<Integer> enlaces = new ArrayList<Integer>();
         do{
             enlace = sc.next();
-            idEnlace = Busqueda.getBusqueda().string2Id(enlace);
-            if(!enlace.equals("-1") && idEnlace != -1 && !enlaces.contains(idEnlace))  {
-                enlaces.add(idEnlace);
-                System.out.print("URL correcta, vuelva a introducir otra: ");
-            } else if (!enlace.equals("-1") && idEnlace == -1){
-                System.out.print("URL incorrecta, vuelva a introducir otra: ");
-            } else if (!enlace.equals("-1") && enlaces.contains(idEnlace)){
-                System.out.print("Enlace añadido previamente, prueba con otro enlace: ");
+            idEnlace = ListaWebs.getListaWebs().string2Id(enlace);
+            if(!enlace.matches("\\s+-1\\s+")){
+            	 if(idEnlace != -1 && !enlaces.contains(idEnlace))  {
+                     enlaces.add(idEnlace);
+                     System.out.print("URL correcta, vuelva a introducir otra: ");
+                 } else if (idEnlace == -1){
+                     System.out.print("URL incorrecta, vuelva a introducir otra: ");
+                 } else if (enlaces.contains(idEnlace)){
+                     System.out.print("Enlace añadido previamente, prueba con otro enlace: ");
+                 }
             }
+           
         }
         while(!enlace.equals("-1"));
         Stopwatch stp = new Stopwatch();
         Web nuevaWeb = new Web(web,id,enlaces);
-        Busqueda.getBusqueda().insertarWeb(nuevaWeb);
+        ListaWebs.getListaWebs().insertarWeb(nuevaWeb);
         System.out.println(stp.elapsedTime());
 
     }
@@ -68,7 +71,7 @@ public class Sistema {
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
         Stopwatch stp = new Stopwatch();
-        ArrayList<String> lista = Busqueda.getBusqueda().enlacesSalientes(web);
+        ArrayList<String> lista = ListaWebs.getListaWebs().enlacesSalientes(web);
         System.out.print("Se han encontrado las siguientes webs relacionadas:");
         for (int i = 0; i<lista.size(); i++){
             System.out.print(" " + lista.get(i));
@@ -94,7 +97,7 @@ public class Sistema {
 
     public static ArrayList<String> listaOrdenadaWebs(){
         Stopwatch stp = new Stopwatch();
-        ArrayList<String> lista = Busqueda.getBusqueda().webOrdenada();
+        ArrayList<String> lista = ListaWebs.getListaWebs().webOrdenada();
         System.out.println(stp.elapsedTime());
         return lista;
     }
