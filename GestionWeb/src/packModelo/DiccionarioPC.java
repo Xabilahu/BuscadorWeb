@@ -1,14 +1,15 @@
 package packModelo;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class DiccionarioPC {
 
     private static DiccionarioPC miDiccionarioPC = new DiccionarioPC();
-    private ArrayList<String> listaPalabras;
+    private HashSet<String> listaPalabras;
 
     private DiccionarioPC(){
-        this.listaPalabras = new ArrayList<String>();
+        this.listaPalabras = new HashSet<String>();
     }
 
     public static DiccionarioPC getDiccionarioPC(){
