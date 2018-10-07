@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 import packTools.SortAndSearch;
 
-public class Busqueda{
+public class ListaWebs{
 
-    private static Busqueda miBusqueda = new Busqueda();
+    private static ListaWebs miListaWebs = new ListaWebs();
     private ArrayList<Web> listaWebs;
 
-    private Busqueda(){
+    private ListaWebs(){
         this.listaWebs = new ArrayList<Web>();
     }
 
@@ -19,8 +19,8 @@ public class Busqueda{
     	return this.listaWebs.size();
 	}
 
-    public static Busqueda getBusqueda(){
-        return miBusqueda;
+    public static ListaWebs getListaWebs(){
+        return miListaWebs;
     }
     
     public Iterator<Web> getIterator(){
@@ -28,7 +28,12 @@ public class Busqueda{
     }
 
     public String id2String(int pId) {
-    	return this.listaWebs.get(pId).getNombre();
+    	if (pId >= 0 && pId <= longitud() - 1) {
+    		return this.listaWebs.get(pId).getNombre();
+    	}else {
+    		return "No existen webs con ese indice";
+    	}
+    	
     }
 
     public int string2Id(String pNombre) {
@@ -47,7 +52,7 @@ public class Busqueda{
     }
 
     public ArrayList<String> enlacesSalientes(String pNombre) {
-        ArrayList<String> enlacesSalientes = new ArrayList<String>();
+        ArrayList<String> enlacesSalientes = null;
         ArrayList<Integer> idEnlacesSalientes = null;
         Iterator<Integer> itr = null;
         int enlace;
@@ -58,6 +63,7 @@ public class Busqueda{
 			web = it.next();
 			if(web.getNombre().equals(pNombre)) {
 				encontrado = true;
+				enlacesSalientes = new ArrayList<String>();
 				idEnlacesSalientes = web.enlacesSalientes();
 				itr = idEnlacesSalientes.iterator();
 				while (itr.hasNext()){
@@ -83,8 +89,9 @@ public class Busqueda{
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
-    	ArrayList<String> word2Webs = new ArrayList<String>();
-    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {    	
+    	ArrayList<String> word2Webs = null;
+    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {    
+    		word2Webs = new ArrayList<String>();
     		Web web = null;
 			Iterator<Web> it = this.getIterator();
 			while (it.hasNext()){
@@ -98,8 +105,9 @@ public class Busqueda{
     }
 
     public ArrayList<String> web2Words(String pNombre) {
-    	ArrayList<String> web2Words = new ArrayList<String>();
+    	ArrayList<String> web2Words = null;
     	if(string2Id(pNombre)!= -1) {
+    		web2Words = new ArrayList<String>();
        		web2Words = DiccionarioPC.getDiccionarioPC().web2Words(pNombre);
     	} 	    	
     	return web2Words;

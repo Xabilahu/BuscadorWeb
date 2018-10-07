@@ -37,7 +37,7 @@ public class Fichero {
                     i++;
                 }
                 wActual = new Web(spWeb[0], Integer.parseInt(spWeb[1]), listaEnlaces);
-                Busqueda.getBusqueda().insertarWeb(wActual);
+                ListaWebs.getListaWebs().insertarWeb(wActual);
             }
             entradaWeb.close();
             entradaEnlac.close();
@@ -64,7 +64,7 @@ public class Fichero {
             PrintWriter wrEnlac = new PrintWriter(pNomEnlac);
             Web wActual;
             int enlac;
-            Iterator<Web> itrWeb = Busqueda.getBusqueda().getIterator();
+            Iterator<Web> itrWeb = ListaWebs.getListaWebs().getIterator();
             Iterator<Integer> itrEnlac;
             ArrayList<Integer> arrayEnlac;
             while (itrWeb.hasNext()){
