@@ -8,24 +8,27 @@ import packTools.SortAndSearch;
 
 public class ListaWebs{
 
-    private static ListaWebs miListaWebs = new ListaWebs();
+    private static ListaWebs miListaWebs = null;
     private ArrayList<Web> listaWebs;
 
     private ListaWebs(){
         this.listaWebs = new ArrayList<Web>();
     }
-
-    public int longitud(){
-    	return this.listaWebs.size();
-	}
-
-    public static ListaWebs getListaWebs(){
-        return miListaWebs;
-    }
     
+    public static ListaWebs getListaWebs(){
+    	if(miListaWebs == null) {
+    		miListaWebs = new ListaWebs();
+		}
+        return miListaWebs;
+    }   
+   
     public Iterator<Web> getIterator(){
     	return listaWebs.iterator();
     }
+    
+    public int longitud(){
+    	return this.listaWebs.size();
+	}
 
     public String id2String(int pId) {
     	if (pId >= 0 && pId <= longitud() - 1) {
@@ -89,19 +92,46 @@ public class ListaWebs{
     }
 
     public ArrayList<String> word2Webs(String pPalabraClave) {        
-    	ArrayList<String> word2Webs = null;
-    	if(DiccionarioPC.getDiccionarioPC().existe(pPalabraClave)) {    
-    		word2Webs = new ArrayList<String>();
-    		Web web = null;
-			Iterator<Web> it = this.getIterator();
-			while (it.hasNext()){
-				web = it.next();				
-				if (web.getNombre().contains(pPalabraClave)) {
-					word2Webs.add(web.getNombre());
-				}
-			}
+    	ArrayList<String> word2Webs = new ArrayList<String>();
+    	ArrayList<String> word2WebsAux = new ArrayList<String>();
+    	String[] palabrasClaves = pPalabraClave.split("\\s+");
+    	Iterator<Web> itWeb;
+    	Iterator<String> itString;
+    	Web web;
+    	String webS;
+    	int count = 0;
+    	while (count < palabrasClaves.length && word2Webs!= null) {
+    		if(DiccionarioPC.getDiccionarioPC().existe(palabrasClaves[count])){
+    			if(word2Webs.isEmpty()) {
+    				itWeb = this.getIterator();
+    				while (itWeb.hasNext()){
+    					web = itWeb.next();				
+    					if (web.getNombre().contains(palabrasClaves[count])) {
+    						word2Webs.add(web.getNombre());
+    					}
+    				}
+    			}else {
+    				itString = word2Webs.iterator();
+    				while (itString.hasNext()){
+    					webS = itString.next();				
+    					if (webS.contains(palabrasClaves[count])) {
+    						word2WebsAux.add(webS);    						
+    					}
+    				}
+    				if (!word2WebsAux.isEmpty()) {
+    					word2Webs.clear(); 
+    					for(int i = 0; i < word2WebsAux.size(); i++ ) {
+    						word2Webs.add(word2WebsAux.get(i));
+    					}
+    					word2WebsAux.clear();
+    				}    			
+    			}    		
+    		}else {
+    			word2Webs = null;
+    		}
+    		count ++;
     	}
-    	return word2Webs;
+       	return word2Webs;
     }
 
     public ArrayList<String> web2Words(String pNombre) {
