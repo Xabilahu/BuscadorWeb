@@ -73,9 +73,15 @@ public class ListaWebsTest {
 		webs.add("tsunamichannel.com");
 		webs.add("tsunamicockers.com");
 		webs.add("tsunamicompany.com");
+		assertEquals(webs, listaWebs);	
+		listaWebs = ListaWebs.getListaWebs().word2Webs("tsunamic company");
+		webs.clear();
+		webs.add("tsunamicompany.com");
 		assertEquals(webs, listaWebs);					
 		listaWebs = ListaWebs.getListaWebs().word2Webs("zythemaet");
-		assertNull(listaWebs);		
+		assertNull(listaWebs);	
+		listaWebs = ListaWebs.getListaWebs().word2Webs("tsunamic zythemaet");
+		assertNull(listaWebs);
 	}
 	
 	
