@@ -8,24 +8,27 @@ import packTools.SortAndSearch;
 
 public class ListaWebs{
 
-    private static ListaWebs miListaWebs = new ListaWebs();
+    private static ListaWebs miListaWebs = null;
     private ArrayList<Web> listaWebs;
 
     private ListaWebs(){
         this.listaWebs = new ArrayList<Web>();
     }
-
-    public int longitud(){
-    	return this.listaWebs.size();
-	}
-
-    public static ListaWebs getListaWebs(){
-        return miListaWebs;
-    }
     
+    public static ListaWebs getListaWebs(){
+    	if(miListaWebs == null) {
+    		miListaWebs = new ListaWebs();
+		}
+        return miListaWebs;
+    }   
+   
     public Iterator<Web> getIterator(){
     	return listaWebs.iterator();
     }
+    
+    public int longitud(){
+    	return this.listaWebs.size();
+	}
 
     public String id2String(int pId) {
     	if (pId >= 0 && pId <= longitud() - 1) {

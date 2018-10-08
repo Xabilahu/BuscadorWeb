@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class DiccionarioPC {
 
-    private static DiccionarioPC miDiccionarioPC = new DiccionarioPC();
+    private static DiccionarioPC miDiccionarioPC = null;
     private ArrayList<String> listaPalabras;
 
     private DiccionarioPC(){
@@ -12,7 +12,14 @@ public class DiccionarioPC {
     }
 
     public static DiccionarioPC getDiccionarioPC(){
+    	if (miDiccionarioPC == null) {
+    		miDiccionarioPC = new DiccionarioPC();
+    	}
         return miDiccionarioPC;
+    }
+    
+    public Iterator<String> getIterator(){
+        return this.listaPalabras.iterator();
     }
 
     public void insertarPalabraClave(String pPalabra){
@@ -36,10 +43,6 @@ public class DiccionarioPC {
             }           
         }
         return words;
-    }
-
-    public Iterator<String> getIterator(){
-        return this.listaPalabras.iterator();
-    }
+    }   
 
 }

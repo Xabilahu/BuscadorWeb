@@ -9,11 +9,14 @@ import java.util.Scanner;
 
 public class Fichero {
 
-    private static Fichero miFichero = new Fichero();
+    private static Fichero miFichero = null;
 
     private Fichero(){}
 
     public static Fichero getFichero(){
+    	if (miFichero == null) {
+    		miFichero = new Fichero();
+    	}
         return miFichero;
     }
 
