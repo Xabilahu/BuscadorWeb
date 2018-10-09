@@ -91,7 +91,7 @@ public class ListaWebs{
     	//return listaWebs.stream().map(Web::getNombre).sorted().collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public ArrayList<String> word2Webs(String pPalabraClave) {        
+    public ArrayList<String> word2Webs(String pPalabraClave) {
     	ArrayList<String> word2Webs = new ArrayList<String>();
     	ArrayList<String> word2WebsAux = new ArrayList<String>();
     	String[] palabrasClaves = pPalabraClave.split("\\s+");
@@ -105,7 +105,7 @@ public class ListaWebs{
     			if(word2Webs.isEmpty()) {
     				itWeb = this.getIterator();
     				while (itWeb.hasNext()){
-    					web = itWeb.next();				
+    					web = itWeb.next();
     					if (web.getNombre().contains(palabrasClaves[count])) {
     						word2Webs.add(web.getNombre());
     					}
@@ -113,19 +113,19 @@ public class ListaWebs{
     			}else {
     				itString = word2Webs.iterator();
     				while (itString.hasNext()){
-    					webS = itString.next();				
+    					webS = itString.next();
     					if (webS.contains(palabrasClaves[count])) {
-    						word2WebsAux.add(webS);    						
+    						word2WebsAux.add(webS);
     					}
     				}
     				if (!word2WebsAux.isEmpty()) {
-    					word2Webs.clear(); 
+    					word2Webs.clear();
     					for(int i = 0; i < word2WebsAux.size(); i++ ) {
     						word2Webs.add(word2WebsAux.get(i));
     					}
     					word2WebsAux.clear();
-    				}    			
-    			}    		
+    				}
+    			}
     		}else {
     			word2Webs = null;
     		}
