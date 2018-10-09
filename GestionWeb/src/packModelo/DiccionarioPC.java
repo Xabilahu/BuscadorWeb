@@ -30,8 +30,10 @@ public class DiccionarioPC {
         String palabraClave;
         while (it.hasNext()){
             palabraClave = it.next();
-            if (pNombre.contains(palabraClave)) {
-            	words.add(palabraClave);
+            if (palabraClave.length() >= 3) {
+                if (pNombre.contains(palabraClave)) {
+                    words.add(palabraClave);
+                }
             }
         }
         return words;
