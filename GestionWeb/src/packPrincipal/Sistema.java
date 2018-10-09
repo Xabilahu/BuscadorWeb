@@ -11,7 +11,7 @@ import packTools.Stopwatch;
 
 public class Sistema {
 
-    public void cargarDatosFichero(){
+    public static void cargarDatosFichero(){
         Stopwatch stp = new Stopwatch();
         Fichero.getFichero().cargarListaWeb(System.getProperty("user.dir") + File.separator +"index.txt",System.getProperty("user.dir")+File.separator+"pld-arcs-1-N.txt");
         Fichero.getFichero().cargarDiccionarioPC(System.getProperty("user.dir") + File.separator +"words.txt");
@@ -168,7 +168,7 @@ public class Sistema {
                 error = false;
                 switch (opcion) {
                     case 1:
-                        new Sistema().cargarDatosFichero();
+                        cargarDatosFichero();
                         primeraVez = false;
                         break;
                     case 2:
