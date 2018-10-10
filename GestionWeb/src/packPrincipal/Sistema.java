@@ -11,14 +11,14 @@ import packTools.Stopwatch;
 
 public class Sistema {
 
-    public static void cargarDatosFichero(){
+    private static void cargarDatosFichero(){
         Stopwatch stp = new Stopwatch();
         Fichero.getFichero().cargarListaWeb(System.getProperty("user.dir") + File.separator +"index.txt",System.getProperty("user.dir")+File.separator+"pld-arcs-1-N.txt");
         Fichero.getFichero().cargarDiccionarioPC(System.getProperty("user.dir") + File.separator +"words.txt");
         System.out.println("\nLa ejecucion ha tardado " + stp.elapsedTime() + " segundos.\n\n");
     }
 
-    public static ArrayList<String> buscarWeb(){
+    private static ArrayList<String> buscarWeb(){
         System.out.print("\nInserte la palabra clave de la web que quiera buscar: ");
         Scanner sc = new Scanner(System.in);
         String palabraClave = sc.next();
@@ -35,7 +35,7 @@ public class Sistema {
         return webs;
     }
 
-    public static void insertarWeb(){
+    private static void insertarWeb(){
         System.out.print("\nIntroduzca la URL de la web que quiera añadir: ");
         Scanner sc = new Scanner(System.in);
         String web;
@@ -73,7 +73,7 @@ public class Sistema {
 
     }
 
-    public static ArrayList<String> devolverEnlaces(){
+    private static ArrayList<String> devolverEnlaces(){
         System.out.print("\nIntroduzca la web de donde desee obtener sus enlaces: ");
         Scanner sc = new Scanner(System.in);
         String web = sc.next();
@@ -91,7 +91,7 @@ public class Sistema {
 
     }
 
-    public static void guardarEnFichero(){
+    private static void guardarEnFichero(){
         System.out.print("\n1. Guardar Webs y Enlaces\n2. Guardar palabras clave del Diccionario\n\nOpción: ");
         Scanner sc = new Scanner(System.in);
         int opcion;
@@ -121,14 +121,14 @@ public class Sistema {
         System.out.println("\nLa ejecucion ha tardado " + stp.elapsedTime() + " segundos.\n\n");
     }
 
-    public static ArrayList<String> listaOrdenadaWebs(){
+    private static ArrayList<String> listaOrdenadaWebs(){
         Stopwatch stp = new Stopwatch();
         ArrayList<String> lista = ListaWebs.getListaWebs().webOrdenada();
         System.out.println("\nLa ejecucion ha tardado " + stp.elapsedTime() + " segundos.\n\n");
         return lista;
     }
 
-    public static ArrayList<String> buscarPalabras(){
+    private static ArrayList<String> buscarPalabras(){
         System.out.print("\nIntroduzca la URL de la web de la que quiera obtener palabras: ");
         Scanner sc = new Scanner(System.in);
         String palabraClave = sc.next();
@@ -168,8 +168,8 @@ public class Sistema {
                 error = false;
                 switch (opcion) {
                     case 1:
-                        cargarDatosFichero();
-                        primeraVez = false;
+                        if (primeraVez) {cargarDatosFichero(); primeraVez = false;}
+                        else System.out.println("\nLos ficheros fueron cargados con anterioridad.\n");
                         break;
                     case 2:
                         if (!primeraVez) buscarWeb();
@@ -205,3 +205,4 @@ public class Sistema {
 
     }
 }
+//TODO implementar funcionalidad añadir webs sin haber cargado los ficheros
