@@ -2,6 +2,7 @@ package packPruebas;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -16,8 +17,8 @@ public class DiccionarioPCTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Fichero.getFichero().cargarListaWeb("index.txt", "pld-arcs-1-N.txt");
-		Fichero.getFichero().cargarDiccionarioPC("words.txt");
+		Fichero.getFichero().cargarListaWeb(System.getProperty("user.dir") + File.separator +"index.txt", System.getProperty("user.dir") + File.separator +"pld-arcs-1-N.txt");
+		Fichero.getFichero().cargarDiccionarioPC(System.getProperty("user.dir") + File.separator +"words.txt");
 	}
 
 	@After
