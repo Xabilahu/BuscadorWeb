@@ -1,8 +1,6 @@
 package packModelo;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
 import packTools.SortAndSearch;
 
@@ -80,10 +78,11 @@ public class ListaWebs{
 
     public ArrayList<String> webOrdenada() {
         SortAndSearch ordenar = new SortAndSearch();
-        ordenar.mergeSort(this.listaWebs);
+        ArrayList<Web> arrayAOrdenar = (ArrayList<Web>) this.listaWebs.clone();
+        ordenar.mergeSort(arrayAOrdenar);
         //ordenar.quickSort(this.listaWebs); Coste O(n^2) porque las webs están ordenadas, peor caso para qs
         ArrayList<String> arrayURL = new ArrayList<String>();
-        Iterator<Web> itr = this.getIterator();
+        Iterator<Web> itr = arrayAOrdenar.iterator();
         while (itr.hasNext()){
             arrayURL.add(itr.next().getNombre());
         }

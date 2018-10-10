@@ -28,18 +28,25 @@ public class ListaWebsTest {
 	@Test
 	public void testId2String() {
 		String web = ListaWebs.getListaWebs().id2String(0);
-		assertEquals("0-00.pl", web);
-		web = ListaWebs.getListaWebs().id2String(2039805);
+		assertEquals(ListaWebs.getListaWebs().getIterator().next().getNombre(), web);
+		web = ListaWebs.getListaWebs().id2String(ListaWebs.getListaWebs().longitud());
 		assertEquals("No existen webs con ese indice", web);
 		web = ListaWebs.getListaWebs().id2String(-1);
-		assertEquals("No existen webs con ese indice", web);		
+		assertEquals("No existen webs con ese indice", web);
+		Web w = new Web("0--14XabiAndresAlvaro.org", ListaWebs.getListaWebs().longitud(), null);
+		ListaWebs.getListaWebs().insertarWeb(w);
+		String URLAnterior = ListaWebs.getListaWebs().id2String(ListaWebs.getListaWebs().longitud() - 1);
+		ListaWebs.getListaWebs().webOrdenada();
+		assertEquals(URLAnterior, ListaWebs.getListaWebs().id2String(ListaWebs.getListaWebs().longitud() - 1));
 	}
 	
 	@Test
 	public void testString2Id() {
-		int indice = ListaWebs.getListaWebs().string2Id("0-00.pl");
-		assertEquals(0, indice);
-		indice = ListaWebs.getListaWebs().string2Id("SFSSADFDG.com");
+	    Web w = new Web("pepitogrillo123.info", ListaWebs.getListaWebs().longitud(), null);
+	    ListaWebs.getListaWebs().insertarWeb(w);
+		int indice = ListaWebs.getListaWebs().string2Id("pepitogrillo123.info");
+		assertEquals(ListaWebs.getListaWebs().longitud() - 1, indice);
+		indice = ListaWebs.getListaWebs().string2Id("SFSSADFDG097435678.com");
 		assertEquals(-1, indice);
 	}
 	
@@ -52,7 +59,7 @@ public class ListaWebsTest {
 		enlaces.clear();
 		salientes = ListaWebs.getListaWebs().enlacesSalientes("0-5.co.il");
 		assertEquals(enlaces, salientes);
-		salientes = ListaWebs.getListaWebs().enlacesSalientes("gdfggf.com");
+		salientes = ListaWebs.getListaWebs().enlacesSalientes("SFSSADFDG097435678.com");
 		assertNull(salientes);
 	}
 	
@@ -108,7 +115,7 @@ public class ListaWebsTest {
 		palabras.add("tsunamic");
 		palabras.add("una");		
 		assertEquals(palabras, listaPalabra);					
-		listaPalabra = ListaWebs.getListaWebs().web2Words("tsunamicompany.coms");
+		listaPalabra = ListaWebs.getListaWebs().web2Words("SFSSADFDG097435678.com");
 		assertNull(listaPalabra);	
 	}	
 	

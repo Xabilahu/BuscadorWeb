@@ -30,6 +30,14 @@ public class DiccionarioPC {
         return listaPalabras.contains(pPalabra);
     }
 
+    public int longitud(){
+        return this.listaPalabras.size();//Sólo se usa en FicheroTest
+    }
+
+    public String get(int pIndex){
+        return this.listaPalabras.get(pIndex);//Sólo se usa en FicheroTest
+    }
+
     public ArrayList<String> web2Words(String pNombre) {
         Iterator<String> it = this.listaPalabras.iterator();
         ArrayList<String> words = new ArrayList<String>();
