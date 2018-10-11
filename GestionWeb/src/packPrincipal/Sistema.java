@@ -21,7 +21,7 @@ public class Sistema {
     private static ArrayList<String> buscarWeb(){
         System.out.print("\nInserte la palabra clave de la web que quiera buscar: ");
         Scanner sc = new Scanner(System.in);
-        String palabraClave = sc.next();
+        String palabraClave = sc.nextLine();
         Stopwatch stp = new Stopwatch();
         ArrayList<String> webs = ListaWebs.getListaWebs().word2Webs(palabraClave.toLowerCase());
         if (webs != null) {
