@@ -138,15 +138,22 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	   // an iterator, doesn't implement remove() since it's optional 
 	   private class ListIterator implements Iterator<T> {
-	       private Node<T> current;
+	       private Node<T> current=last.next;
+	       private boolean primeroPasado=false;
            @Override
            public boolean hasNext() {
-               return current!=null;
+               if (last==null || ( primeroPasado && current==last.next)){
+               		return false;
+			   }
+			   return true;
            }
 
            @Override
            public T next() {
                if(hasNext()) {
+                   if(primeroPasado==false){
+                       primeroPasado=true;
+                   }
                    T aux = current.data;
                    current = current.next;
                    return aux;

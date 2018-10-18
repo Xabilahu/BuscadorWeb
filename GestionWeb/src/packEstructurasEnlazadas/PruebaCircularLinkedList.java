@@ -1,4 +1,4 @@
-package packEstructurasEnlazadas;
+ package packEstructurasEnlazadas;
 
 import java.util.Iterator;
 
