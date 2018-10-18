@@ -158,6 +158,9 @@ public class CircularLinkedList<T> implements ListADT<T> {
                    current = current.next;
                    return aux;
                }
+               else{
+                   throw new NoSuchElementException();
+               }
            }
 
            // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
