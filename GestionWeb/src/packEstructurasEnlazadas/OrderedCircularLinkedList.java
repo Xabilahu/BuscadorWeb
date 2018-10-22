@@ -8,7 +8,7 @@ public class OrderedCircularLinkedList<T extends Comparable> extends CircularLin
 			Node<T> actual = last.next;
 			Node<T> anterior = last;
 			boolean added = false;
-			if (actual.next == last) {
+			if (actual == last) {
 				nuevo.next = last;
 				last.next = nuevo;
 				if(elem.compareTo(last.data) >= 0) {
@@ -39,6 +39,6 @@ public class OrderedCircularLinkedList<T extends Comparable> extends CircularLin
 			last = nuevo;
 			nuevo.next = nuevo;
 		}
-	
+		this.count ++;
 	}
 }
