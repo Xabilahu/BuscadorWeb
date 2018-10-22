@@ -12,27 +12,28 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
     // Constructor
     public CircularLinkedList() {
-        last = null;
-        descr = "";
-        count = 0;
+        this.last = null;
+        this.descr = "";
+        this.count = 0;
     }
 
     public void setDescr(String nom) {
-        descr = nom;
+        this.descr = nom;
     }
 
     public String getDescr() {
-        return descr;
+        return this.descr;
     }
 
     public T removeFirst() {
         // Elimina el primer elemento de la lista
         // Precondicion: la lista tiene al menos un elemento
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux = last.next.data;
+        T aux = this.last.next.data;
 
-        if (count > 1) last.next = last.next.next;
-        else last = null;
+        if (this.count > 1) this.last.next = this.last.next.next;
+        else this.last = null;
+        this.count--;
 
         return aux;
     }
@@ -41,19 +42,17 @@ public class CircularLinkedList<T> implements ListADT<T> {
         // Elimina el ultimo elemento de la lista
         // Precondicion: la lista tiene al menos un elemento
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux = last.data;
-        Node elemActual = last;
-        int counter = 1;
-
-        if (counter < count) {
-            while (counter <= count) {
+        T aux = this.last.data;
+        if (this.count == 1) this.last = null;
+        else{
+            Node elemActual = this.last.next;
+            while (elemActual.next != this.last) {
                 elemActual = elemActual.next;
-                counter++;
             }
-            elemActual.next = last.next;
-            last = elemActual;
-        } else last = null;
-
+            elemActual.next = this.last.next;
+            this.last = elemActual;
+        }
+        this.count--;
         return aux;
     }
 
@@ -61,28 +60,26 @@ public class CircularLinkedList<T> implements ListADT<T> {
     public T remove(T elem) {
         //Elimina un elemento concreto de la lista
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux;
-        Node elemActual = last;
-        boolean found = false;
-        int counter = count;
-        if (elemActual.data.equals(elem)) aux = this.removeLast();
-        else {
-            while (!found && counter > 0) {
+        T aux = null;
+        if (!this.isEmpty()){
+            Node elemActual = this.last;
+            boolean found = false;
+            while (elemActual.next != this.last && !found) {
                 if (elemActual.next.data.equals(elem)) found = true;
-                else {
-                    elemActual = elemActual.next;
-                    count--;
-                }
+                else elemActual = elemActual.next;
             }
-            aux = (T) elemActual.next.data;
-            elemActual.next = elemActual.next.next;
+            if (found || elemActual.next.data.equals(elem)) {
+                aux = (T) elemActual.next.data;
+                elemActual.next = elemActual.next.next;
+                this.count--;
+            }
         }
         return aux;
     }
 
     public T first() {
         //Da acceso al primer elemento de la lista
-        if (isEmpty()) return null;
+        if (this.isEmpty()) return null;
         else return last.next.data;
     }
 
@@ -93,25 +90,27 @@ public class CircularLinkedList<T> implements ListADT<T> {
     }
 
     public boolean contains(T elem) {
-        return elem.equals(this.find(elem));
+        if(this.find(elem) != null) return true;
+        else return false;
     }
 
     public T find(T elem) {
         //Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no esta
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux;
-        Node elemActual = last;
-        boolean found = false;
-        int counter = count;
-        while (!found && counter > 0) {
-            if (elemActual.data.equals(elem)) {
-                found = true;
-            } else {
-                elemActual = elemActual.next;
-                count--;
+        T aux = null;
+        if (!this.isEmpty()) {
+            Node elemActual = last.next;
+            boolean found = false;
+
+            if (elemActual.data.equals(elem)) found = true;
+            else elemActual = elemActual.next;
+
+            while (elemActual != last.next && !found) {
+                if (elemActual.data.equals(elem)) found = true;
+                else elemActual = elemActual.next;
             }
+            if (found) aux = (T) elemActual.data;
         }
-        aux = (T) elemActual.data;
         return aux;
     }
 
