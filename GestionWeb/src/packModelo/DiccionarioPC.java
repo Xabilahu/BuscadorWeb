@@ -12,12 +12,12 @@ public class DiccionarioPC {
     }
 
     public static DiccionarioPC getDiccionarioPC(){
-    	if (miDiccionarioPC == null) {
-    		miDiccionarioPC = new DiccionarioPC();
-    	}
+        if (miDiccionarioPC == null) {
+            miDiccionarioPC = new DiccionarioPC();
+        }
         return miDiccionarioPC;
     }
-    
+
     public Iterator<String> getIterator(){
         return this.listaPalabras.iterator();
     }
@@ -45,12 +45,12 @@ public class DiccionarioPC {
         while (it.hasNext()){
             palabraClave = it.next();
             if (palabraClave.length() >= 3) {
-            	 if (pNombre.contains(palabraClave)) {
-                 	words.add(palabraClave);
-                 }
-            }           
+                if (pNombre.contains(palabraClave)) {
+                    words.add(palabraClave);
+                }
+            }
         }
         return words;
-    }   
+    }
 
 }

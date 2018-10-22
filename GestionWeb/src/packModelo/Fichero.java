@@ -1,5 +1,4 @@
 package packModelo;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,14 +13,14 @@ public class Fichero {
     private Fichero(){}
 
     public static Fichero getFichero(){
-    	if (miFichero == null) {
-    		miFichero = new Fichero();
-    	}
+        if (miFichero == null) {
+            miFichero = new Fichero();
+        }
         return miFichero;
     }
 
     public void cargarListaWeb(String pNomWeb, String pNomEnlac){
-    
+
         try{
             //Los archivos deben estar dentro de la carpeta GestionWeb
             Scanner entradaWeb = new Scanner(new FileReader(pNomWeb));

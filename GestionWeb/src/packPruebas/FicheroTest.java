@@ -27,26 +27,26 @@ public class FicheroTest {
     @org.junit.Test
     public void testCargarListaWeb() {
         try {
-        	  BufferedReader buffer = new BufferedReader(new FileReader("index.txt"));
-        	  BufferedReader bufferEnlaces = new BufferedReader(new FileReader("pld-arcs-1-N.txt"));
-        	  String web;
-        	  String enlaces;
-        	  int longitudEnlaces;
-        	  Iterator<Web> itr = ListaWebs.getListaWebs().getIterator();
-        	  for( int i = 0 ;  i <= ListaWebs.getListaWebs().longitud() - 1 ; i ++) {
-        		  web = buffer.readLine();
-        		  web = web.split("\\s+")[0];
-        		  enlaces = bufferEnlaces.readLine();
-        		  longitudEnlaces = enlaces.split("\\s+").length;
-        		  assertTrue(itr.next().enlacesSalientes().size() == (longitudEnlaces - 2));
-        		  assertTrue(ListaWebs.getListaWebs().id2String(i).equals(web));
-        	  }  	     		  
-        	  buffer.close();
-        	  bufferEnlaces.close();
-        	  assertEquals(ListaWebs.getListaWebs().enlacesSalientes("010-golf.co.jp").size(),0);
-		} catch (Exception e) {
+            BufferedReader buffer = new BufferedReader(new FileReader("index.txt"));
+            BufferedReader bufferEnlaces = new BufferedReader(new FileReader("pld-arcs-1-N.txt"));
+            String web;
+            String enlaces;
+            int longitudEnlaces;
+            Iterator<Web> itr = ListaWebs.getListaWebs().getIterator();
+            for( int i = 0 ;  i <= ListaWebs.getListaWebs().longitud() - 1 ; i ++) {
+                web = buffer.readLine();
+                web = web.split("\\s+")[0];
+                enlaces = bufferEnlaces.readLine();
+                longitudEnlaces = enlaces.split("\\s+").length;
+                assertTrue(itr.next().enlacesSalientes().size() == (longitudEnlaces - 2));
+                assertTrue(ListaWebs.getListaWebs().id2String(i).equals(web));
+            }
+            buffer.close();
+            bufferEnlaces.close();
+            assertEquals(ListaWebs.getListaWebs().enlacesSalientes("010-golf.co.jp").size(),0);
+        } catch (Exception e) {
             System.out.println("No existen los ficheros index.txt y pld-arcs-1-N.txt.");
-		}
+        }
     }
 
     @org.junit.Test

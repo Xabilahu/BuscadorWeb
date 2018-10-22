@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import packModelo.DiccionarioPC;
 import packModelo.Fichero;
-import packModelo.ListaWebs;
 
 public class DiccionarioPCTest {
 
@@ -43,11 +42,11 @@ public class DiccionarioPCTest {
 		palabras.add("ich");
 		palabras.add("nam");
 		palabras.add("sun");
-		palabras.add("tsun");		
+		palabras.add("tsun");
 		palabras.add("tsunami");
 		palabras.add("tsunamic");
-		palabras.add("una");		
-		assertEquals(palabras, listaPalabra);	
+		palabras.add("una");
+		assertEquals(palabras, listaPalabra);
 	}
 
 }

@@ -15,7 +15,7 @@ import packModelo.Fichero;
 import packModelo.Web;
 
 public class ListaWebsTest {
-		
+
 	@BeforeClass
 	public static void setUp() throws Exception {
 		Fichero.getFichero().cargarListaWeb( System.getProperty("user.dir") + File.separator +"index.txt", System.getProperty("user.dir") + File.separator +"pld-arcs-1-N.txt");
@@ -40,17 +40,17 @@ public class ListaWebsTest {
 		ListaWebs.getListaWebs().webOrdenada();
 		assertEquals(URLAnterior, ListaWebs.getListaWebs().id2String(ListaWebs.getListaWebs().longitud() - 1));
 	}
-	
+
 	@Test
 	public void testString2Id() {
-	    Web w = new Web("pepitogrillo123.info", ListaWebs.getListaWebs().longitud(), null);
-	    ListaWebs.getListaWebs().insertarWeb(w);
+		Web w = new Web("pepitogrillo123.info", ListaWebs.getListaWebs().longitud(), null);
+		ListaWebs.getListaWebs().insertarWeb(w);
 		int indice = ListaWebs.getListaWebs().string2Id("pepitogrillo123.info");
 		assertEquals(ListaWebs.getListaWebs().longitud() - 1, indice);
 		indice = ListaWebs.getListaWebs().string2Id("SFSSADFDG097435678.com");
 		assertEquals(-1, indice);
 	}
-	
+
 	@Test
 	public void testEnlacesSalientes() {
 		ArrayList<String> salientes = ListaWebs.getListaWebs().enlacesSalientes("0-24.ro");
@@ -63,15 +63,15 @@ public class ListaWebsTest {
 		salientes = ListaWebs.getListaWebs().enlacesSalientes("SFSSADFDG097435678.com");
 		assertNull(salientes);
 	}
-	
+
 	@Test
 	public void testWebOrdenada() {
-		ArrayList<String> ordenada = ListaWebs.getListaWebs().webOrdenada();		
+		ArrayList<String> ordenada = ListaWebs.getListaWebs().webOrdenada();
 		for (int i = 1; i <= ordenada.size() - 1; i ++) {
 			assertTrue(ordenada.get(i-1).compareTo(ordenada.get(i)) < 0);
 		}
 	}
-		
+
 	@Test
 	public void testWord2Webs() {
 		ArrayList<String> listaWebs = ListaWebs.getListaWebs().word2Webs("zythem");
@@ -81,18 +81,18 @@ public class ListaWebsTest {
 		webs.add("tsunamichannel.com");
 		webs.add("tsunamicockers.com");
 		webs.add("tsunamicompany.com");
-		assertEquals(webs, listaWebs);	
+		assertEquals(webs, listaWebs);
 		listaWebs = ListaWebs.getListaWebs().word2Webs("tsunamic company");
 		webs.clear();
 		webs.add("tsunamicompany.com");
-		assertEquals(webs, listaWebs);					
+		assertEquals(webs, listaWebs);
 		listaWebs = ListaWebs.getListaWebs().word2Webs("zythemaet");
-		assertNull(listaWebs);	
+		assertNull(listaWebs);
 		listaWebs = ListaWebs.getListaWebs().word2Webs("tsunamic zythemaet");
 		assertNull(listaWebs);
 	}
-	
-	
+
+
 	@Test
 	public void testWeb2Words() {
 		ArrayList<String> listaPalabra = ListaWebs.getListaWebs().web2Words("0-00.pl");
@@ -111,13 +111,13 @@ public class ListaWebsTest {
 		palabras.add("ich");
 		palabras.add("nam");
 		palabras.add("sun");
-		palabras.add("tsun");		
+		palabras.add("tsun");
 		palabras.add("tsunami");
 		palabras.add("tsunamic");
-		palabras.add("una");		
-		assertEquals(palabras, listaPalabra);					
+		palabras.add("una");
+		assertEquals(palabras, listaPalabra);
 		listaPalabra = ListaWebs.getListaWebs().web2Words("SFSSADFDG097435678.com");
-		assertNull(listaPalabra);	
-	}	
-	
+		assertNull(listaPalabra);
+	}
+
 }
