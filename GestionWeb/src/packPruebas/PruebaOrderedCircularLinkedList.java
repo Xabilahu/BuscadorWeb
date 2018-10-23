@@ -1,7 +1,6 @@
 package packPruebas;
 
 import packEstructurasEnlazadas.OrderedCircularLinkedList;
-import packEstructurasEnlazadas.Persona;
 
 public class PruebaOrderedCircularLinkedList {
 		

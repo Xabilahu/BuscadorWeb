@@ -1,4 +1,4 @@
-package packEstructurasEnlazadas;
+package packPruebas;
 
 public class Persona implements Comparable<Persona> {
 	
