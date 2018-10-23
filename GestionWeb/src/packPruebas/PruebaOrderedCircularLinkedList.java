@@ -1,6 +1,9 @@
-package packEstructurasEnlazadas;
+package packPruebas;
 
-public class PruebaOrderedCircularLinkedList {	
+import packEstructurasEnlazadas.OrderedCircularLinkedList;
+import packEstructurasEnlazadas.Persona;
+
+public class PruebaOrderedCircularLinkedList {
 		
 		public static void main(String[] args)  {
 			

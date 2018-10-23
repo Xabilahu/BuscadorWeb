@@ -170,7 +170,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 }
 		
 		
-         public void visualizarNodos() {
+        public void visualizarNodos() {
 			System.out.println(this.toString());
 		}
 
