@@ -18,7 +18,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
     }
 
     public void setDescr(String nom) {
-        this.descr = nom;
+        this.descr = nom.trim();
     }
 
     public String getDescr() {
@@ -162,9 +162,12 @@ public class CircularLinkedList<T> implements ListADT<T> {
                }
            }
 
-           // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+           @Override
+           public void remove() {
+	           throw new NoSuchElementException();
+           }
 
-	   } // private class
+}
 		
 		
          public void visualizarNodos() {
@@ -173,13 +176,13 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 		@Override
 		public String toString() {
-			String result = "";
+			String result = "\n";
 			Iterator<T> it = iterator();
 			while (it.hasNext()) {
 				T elem = it.next();
 				result += "[" + elem.toString() + "] \n";
 			}	
-			return "SimpleLinkedList " + result + "]";
+			return result;
 		}
 
 }

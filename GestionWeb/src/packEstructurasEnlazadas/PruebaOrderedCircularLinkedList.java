@@ -28,7 +28,7 @@ public class PruebaOrderedCircularLinkedList {
 			System.out.println("7? " + l.find(7));
 			
 			
-			
+
 			OrderedCircularLinkedList<Persona> l2 = new OrderedCircularLinkedList<Persona>();
 			l2.add(new Persona("jon", "1111"));
 			l2.add(new Persona("ana", "7777"));
@@ -50,8 +50,7 @@ public class PruebaOrderedCircularLinkedList {
 			System.out.println("5555? " + l2.find(new Persona("", "5555")));
 			System.out.println("7777? " + l2.find(new Persona("", "7777")));	
 			System.out.println("8888? " + l2.find(new Persona("", "8888")));	
-			
-			
-	}
-	}
 
+			
+	}
+}
