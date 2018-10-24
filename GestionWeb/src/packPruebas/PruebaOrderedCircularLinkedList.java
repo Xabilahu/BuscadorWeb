@@ -1,6 +1,8 @@
-package packEstructurasEnlazadas;
+package packPruebas;
 
-public class PruebaOrderedCircularLinkedList {	
+import packEstructurasEnlazadas.OrderedCircularLinkedList;
+
+public class PruebaOrderedCircularLinkedList {
 		
 		public static void main(String[] args)  {
 			
@@ -12,7 +14,7 @@ public class PruebaOrderedCircularLinkedList {
 			l.add(9);
 			l.add(0);
 			l.add(20);
-			l.remove(new Integer(7));
+			l.remove(7);
 
 			
 			System.out.print(" Lista ...............");
@@ -28,7 +30,7 @@ public class PruebaOrderedCircularLinkedList {
 			System.out.println("7? " + l.find(7));
 			
 			
-			
+
 			OrderedCircularLinkedList<Persona> l2 = new OrderedCircularLinkedList<Persona>();
 			l2.add(new Persona("jon", "1111"));
 			l2.add(new Persona("ana", "7777"));
@@ -50,8 +52,7 @@ public class PruebaOrderedCircularLinkedList {
 			System.out.println("5555? " + l2.find(new Persona("", "5555")));
 			System.out.println("7777? " + l2.find(new Persona("", "7777")));	
 			System.out.println("8888? " + l2.find(new Persona("", "8888")));	
-			
-			
-	}
-	}
 
+			
+	}
+}
