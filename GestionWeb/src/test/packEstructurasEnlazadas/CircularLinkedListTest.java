@@ -4,7 +4,10 @@ import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 import packEstructurasEnlazadas.CircularLinkedList;
+import packEstructurasEnlazadas.Node;
 import packEstructurasEnlazadas.UnorderedCircularLinkedList;
+
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -224,7 +227,13 @@ public void testSize() throws Exception {
 */ 
 @Test
 public void testIterator() throws Exception {
-    assertNull(null);
+    UnorderedCircularLinkedList<Integer> listaVacia= new UnorderedCircularLinkedList<Integer>();
+    UnorderedCircularLinkedList<Integer> listaElem= new UnorderedCircularLinkedList<Integer>();
+    listaElem.addToRear(1);
+    Iterator<Integer> itr = listaElem.iterator();
+    Iterator<Integer> itr1 = listaVacia.iterator();
+    assertNotNull(itr);
+    assertNotNull(itr1);
 } 
 
 /** 
@@ -234,6 +243,11 @@ public void testIterator() throws Exception {
 */ 
 @Test
 public void testVisualizarNodos() throws Exception {
+    UnorderedCircularLinkedList<Integer> listaVacia= new UnorderedCircularLinkedList<Integer>();
+    UnorderedCircularLinkedList<Integer> listaElem= new UnorderedCircularLinkedList<Integer>();
+    listaElem.addToRear(1);
+    listaElem.visualizarNodos();
+    listaVacia.visualizarNodos();
     assertNull(null);
 } 
 
@@ -244,7 +258,11 @@ public void testVisualizarNodos() throws Exception {
 */ 
 @Test
 public void testToString() throws Exception {
-    assertNull(null);
+    UnorderedCircularLinkedList<Integer> listaVacia= new UnorderedCircularLinkedList<Integer>();
+    UnorderedCircularLinkedList<Integer> listaElem= new UnorderedCircularLinkedList<Integer>();
+    listaElem.addToRear(1);
+    assertNotNull(listaElem.toString());
+    assertNotNull(listaVacia.toString());
 } 
 
 /** 
@@ -254,7 +272,30 @@ public void testToString() throws Exception {
 */ 
 @Test
 public void testHasNext() throws Exception {
-    assertNull(null);
+    UnorderedCircularLinkedList<Integer> listaVacia= new UnorderedCircularLinkedList<Integer>();
+    Iterator<Integer> itr1 = listaVacia.iterator();
+    assertFalse(itr1.hasNext());
+    UnorderedCircularLinkedList<Integer> lista1Elem= new UnorderedCircularLinkedList<Integer>();
+    lista1Elem.addToFront(2);
+    Iterator<Integer> itr2 = lista1Elem.iterator();
+    assertTrue(itr2.hasNext());
+    Integer aux=itr2.next();
+    assertFalse(itr2.hasNext());
+    UnorderedCircularLinkedList<Integer> listaElem= new UnorderedCircularLinkedList<Integer>();
+    listaElem.addToFront(2);
+    listaElem.addToFront(3);
+    listaElem.addToFront(1);
+    listaElem.addToFront(4);
+    Iterator<Integer> itr = listaElem.iterator();
+    assertTrue(itr.hasNext());
+    aux=itr.next();
+    assertTrue(itr.hasNext());
+    aux=itr.next();
+    assertTrue(itr.hasNext());
+    aux=itr.next();
+    assertTrue(itr.hasNext());
+    aux=itr.next();
+    assertFalse(itr.hasNext());
 } 
 
 /** 
@@ -264,7 +305,22 @@ public void testHasNext() throws Exception {
 */ 
 @Test
 public void testNext() throws Exception {
-    assertNull(null);
+    UnorderedCircularLinkedList<Integer> listaElem= new UnorderedCircularLinkedList<Integer>();
+    listaElem.addToFront(2);
+    listaElem.addToFront(3);
+    listaElem.addToFront(1);
+    listaElem.addToFront(4);
+    Iterator<Integer> itr = listaElem.iterator();
+    Integer aux;
+    aux= itr.next();
+    assertTrue(aux==4);
+    aux=itr.next();
+    assertTrue(aux==1);
+    aux=itr.next();
+    assertTrue(aux==3);
+    aux=itr.next();
+    assertTrue(aux==2);
+
 } 
 
 
