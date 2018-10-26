@@ -164,7 +164,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
            @Override
            public void remove() {
-	           throw new NoSuchElementException();
+	           throw new UnsupportedOperationException();
            }
 
 }
