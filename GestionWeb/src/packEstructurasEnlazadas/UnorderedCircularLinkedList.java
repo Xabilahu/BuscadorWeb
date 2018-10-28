@@ -2,6 +2,16 @@ package packEstructurasEnlazadas;
 
 public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 
+    public UnorderedCircularLinkedList(){
+        super();
+    }
+
+    public UnorderedCircularLinkedList(Node<T> pNode, int pCount, String pDescr){
+        this.last = pNode;
+        this.count = pCount;
+        this.descr = pDescr;
+    }
+
 	public void addToFront(T elem) {
         Node<T> nuevo = new Node<T>(elem);
         if (this.last != null) nuevo.next = this.last.next;
@@ -21,6 +31,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
             Node<T> actualNode = this.last;
             Node<T> anterior = actualNode;
             actualNode = this.comprobarTarget(elem, target, actualNode);
+            if (actualNode == this.last) this.last = this.last.next;
             while (anterior != actualNode) {
                 anterior = actualNode;
                 actualNode = this.comprobarTarget(elem, target, actualNode);
@@ -31,8 +42,8 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 
 	private Node<T> comprobarTarget(T elem, T target, Node<T> actualNode) {
 	    //Pre: actualNode != null
-        //Post: se añade elem a la lista si actualNode.data == target y no se modifica actualNode
-        //      si actualNode.data != target actualNode avanza y se devuelve su referencia
+        //Post: se añade elem a la lista si actualNode.data.equals(target) y no se modifica actualNode
+        //      si actualNode.data.equals(target) actualNode avanza y se devuelve su referencia
         if (actualNode.data.equals(target)){
             Node<T> nuevo = new Node<T>(elem);
             nuevo.next = actualNode.next;
