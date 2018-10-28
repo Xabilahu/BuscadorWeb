@@ -29,31 +29,35 @@ public class CircularLinkedList<T> implements ListADT<T> {
         // Elimina el primer elemento de la lista
         // Precondicion: la lista tiene al menos un elemento
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux = this.last.next.data;
+        if (this.last != null) {
+            T aux = this.last.next.data;
 
-        if (this.count > 1) this.last.next = this.last.next.next;
-        else this.last = null;
-        this.count--;
+            if (this.count > 1) this.last.next = this.last.next.next;
+            else this.last = null;
+            this.count--;
 
-        return aux;
+            return aux;
+        } else throw new UnsupportedOperationException();
     }
 
     public T removeLast() {
         // Elimina el ultimo elemento de la lista
         // Precondicion: la lista tiene al menos un elemento
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        T aux = this.last.data;
-        if (this.count == 1) this.last = null;
-        else{
-            Node elemActual = this.last.next;
-            while (elemActual.next != this.last) {
-                elemActual = elemActual.next;
+        if (this.last != null) {
+            T aux = this.last.data;
+            if (this.count == 1) this.last = null;
+            else {
+                Node elemActual = this.last.next;
+                while (elemActual.next != this.last) {
+                    elemActual = elemActual.next;
+                }
+                elemActual.next = this.last.next;
+                this.last = elemActual;
             }
-            elemActual.next = this.last.next;
-            this.last = elemActual;
-        }
-        this.count--;
-        return aux;
+            this.count--;
+            return aux;
+        } else throw new UnsupportedOperationException();
     }
 
 
@@ -68,9 +72,13 @@ public class CircularLinkedList<T> implements ListADT<T> {
                 if (elemActual.next.data.equals(elem)) found = true;
                 else elemActual = elemActual.next;
             }
-            if (found || elemActual.next.data.equals(elem)) {
+            if (found || last.data.equals(elem)) {
                 aux = (T) elemActual.next.data;
-                elemActual.next = elemActual.next.next;
+                if (elemActual.next == this.last && this.count == 1) this.last = null;
+                else {
+                    if (elemActual.next == this.last) this.last = elemActual;
+                    elemActual.next = elemActual.next.next;
+                }
                 this.count--;
             }
         }
@@ -168,8 +176,8 @@ public class CircularLinkedList<T> implements ListADT<T> {
            }
 
 }
-		
-		
+
+
         public void visualizarNodos() {
 			System.out.println(this.toString());
 		}
