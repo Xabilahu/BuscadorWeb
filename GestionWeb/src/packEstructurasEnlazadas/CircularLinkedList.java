@@ -3,7 +3,7 @@ package packEstructurasEnlazadas;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class CircularLinkedList<T> implements ListADT<T> {
+public abstract class CircularLinkedList<T> implements ListADT<T> {
 
     // Atributos
     protected Node<T> last; // apuntador al ultimo
@@ -93,7 +93,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
     public T last() {
         //Da acceso al ultimo elemento de la lista
-        if (isEmpty()) return null;
+        if (this.isEmpty()) return null;
         else return last.data;
     }
 
