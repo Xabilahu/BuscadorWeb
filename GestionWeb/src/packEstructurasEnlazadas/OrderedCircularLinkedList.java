@@ -2,6 +2,16 @@ package packEstructurasEnlazadas;
 
 public class OrderedCircularLinkedList<T extends Comparable> extends CircularLinkedList<T> implements OrderedListADT<T> {
 	
+	  public OrderedCircularLinkedList(){
+	        super();
+	    }
+
+	    public OrderedCircularLinkedList(Node<T> pNode, int pCount, String pDescr){
+	        this.last = pNode;
+	        this.count = pCount;
+	        this.descr = pDescr;
+	    }
+	
 	public void add(T elem){		
 		Node<T> nuevo = new Node<T>(elem);
 		if (last != null) {

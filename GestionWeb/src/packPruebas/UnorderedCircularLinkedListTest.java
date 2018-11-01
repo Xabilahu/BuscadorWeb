@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
 
 public class UnorderedCircularLinkedListTest {
 
-    private UnorderedCircularLinkedList<Character> listaVacía;
+    private UnorderedCircularLinkedList<Character> listaVacia;
     private UnorderedCircularLinkedList<Character> lista1Elem;
     private UnorderedCircularLinkedList<Character> listaVariosElem;
 
     @Before
     public void setUp() throws Exception {
-        this.listaVacía = new UnorderedCircularLinkedList<>();
+        this.listaVacia = new UnorderedCircularLinkedList<>();
         Node<Character> elem = new Node<>('a');
         elem.next = elem;
         this.lista1Elem = new UnorderedCircularLinkedList<>(elem, 1, "1elem");
@@ -33,24 +33,24 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testSetDescrGetDescr() throws Exception {
-        assertEquals(this.listaVacía.getDescr(), "");
-        this.listaVacía.setDescr("");
-        assertEquals(this.listaVacía.getDescr(), "");
-        this.listaVacía.setDescr("       ");
-        assertEquals(this.listaVacía.getDescr(), "");
-        this.listaVacía.setDescr("a    a");
-        assertEquals(this.listaVacía.getDescr(), "a    a");
-        this.listaVacía.setDescr(" a a ");
-        assertEquals(this.listaVacía.getDescr(), "a a");
-        this.listaVacía.setDescr("abc");
-        assertEquals(this.listaVacía.getDescr(), "abc");
+        assertEquals(this.listaVacia.getDescr(), "");
+        this.listaVacia.setDescr("");
+        assertEquals(this.listaVacia.getDescr(), "");
+        this.listaVacia.setDescr("       ");
+        assertEquals(this.listaVacia.getDescr(), "");
+        this.listaVacia.setDescr("a    a");
+        assertEquals(this.listaVacia.getDescr(), "a    a");
+        this.listaVacia.setDescr(" a a ");
+        assertEquals(this.listaVacia.getDescr(), "a a");
+        this.listaVacia.setDescr("abc");
+        assertEquals(this.listaVacia.getDescr(), "abc");
     }
 
     @Test
     public void testRemoveFirst() throws Exception {
-        //******************TEST LISTA VACÍA************************************
+        //******************TEST LISTA VACÃ�A************************************
         try {
-            this.listaVacía.removeFirst();
+            this.listaVacia.removeFirst();
             fail();
         } catch (UnsupportedOperationException e) {
         }
@@ -81,9 +81,9 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testRemoveLast() throws Exception {
-        //******************TEST LISTA VACÍA************************************
+        //******************TEST LISTA VACÃ�A************************************
         try{
-            this.listaVacía.removeLast();
+            this.listaVacia.removeLast();
             fail();
         } catch (UnsupportedOperationException e){}
         //******************TEST LISTA 1 ELEMENTO*******************************
@@ -113,14 +113,14 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testRemove() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertEquals(this.listaVacía.size(), 0);
-        assertNull(this.listaVacía.first());
-        assertNull(this.listaVacía.last());
-        assertNull(this.listaVacía.remove('a'));
-        assertEquals(this.listaVacía.size(), 0);
-        assertNull(this.listaVacía.first());
-        assertNull(this.listaVacía.last());
+        //******************TEST LISTA VACÃ�A************************************
+        assertEquals(this.listaVacia.size(), 0);
+        assertNull(this.listaVacia.first());
+        assertNull(this.listaVacia.last());
+        assertNull(this.listaVacia.remove('a'));
+        assertEquals(this.listaVacia.size(), 0);
+        assertNull(this.listaVacia.first());
+        assertNull(this.listaVacia.last());
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertEquals(this.lista1Elem.size(), 1);
         assertTrue(this.lista1Elem.first().equals('a'));
@@ -187,8 +187,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testFirst() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertNull(this.listaVacía.first());
+        //******************TEST LISTA VACÃ�A************************************
+        assertNull(this.listaVacia.first());
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertTrue(this.lista1Elem.first().equals('a'));
         //******************TEST LISTA VARIOS ELEMENTOS*************************
@@ -197,8 +197,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testLast() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertNull(this.listaVacía.last());
+        //******************TEST LISTA VACÃ�A************************************
+        assertNull(this.listaVacia.last());
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertTrue(this.lista1Elem.last().equals('a'));
         //******************TEST LISTA VARIOS ELEMENTOS*************************
@@ -207,8 +207,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testContains() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertFalse(this.listaVacía.contains('x'));
+        //******************TEST LISTA VACÃ�A************************************
+        assertFalse(this.listaVacia.contains('x'));
         //******************TEST LISTA 1 ELEMENTO*******************************
         //*************************ELEM = X*************************************
         assertFalse(this.lista1Elem.contains('x'));
@@ -227,8 +227,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testFind() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertNull(this.listaVacía.find('x'));
+        //******************TEST LISTA VACÃ�A************************************
+        assertNull(this.listaVacia.find('x'));
         //******************TEST LISTA 1 ELEMENTO*******************************
         //*************************ELEM = X*************************************
         assertNull(this.lista1Elem.find('x'));
@@ -247,8 +247,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testIsEmpty() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertTrue(this.listaVacía.isEmpty());
+        //******************TEST LISTA VACÃ�A************************************
+        assertTrue(this.listaVacia.isEmpty());
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertFalse(this.lista1Elem.isEmpty());
         //******************TEST LISTA VARIOS ELEMENTOS*************************
@@ -257,21 +257,21 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testSize() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        assertEquals(this.listaVacía.size(), 0);
+        //******************TEST LISTA VACÃ�A************************************
+        assertEquals(this.listaVacia.size(), 0);
         //******************TEST LISTA 1 ELEMENTO*******************************
-        this.listaVacía.addToFront('x');
-        assertEquals(this.listaVacía.size(), 1);
+        this.listaVacia.addToFront('x');
+        assertEquals(this.listaVacia.size(), 1);
         //******************TEST LISTA VARIOS ELEMENTOS*************************
-        this.listaVacía.addToFront('x');
-        this.listaVacía.addToFront('x');
-        assertEquals(this.listaVacía.size(), 3);
+        this.listaVacia.addToFront('x');
+        this.listaVacia.addToFront('x');
+        assertEquals(this.listaVacia.size(), 3);
     }
 
     @Test
     public void testHasNext() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        Iterator<Character> itr = this.listaVacía.iterator();
+        //******************TEST LISTA VACÃ�A************************************
+        Iterator<Character> itr = this.listaVacia.iterator();
         assertFalse(itr.hasNext());
         //******************TEST LISTA 1 ELEMENTO*******************************
         itr = this.lista1Elem.iterator();
@@ -291,8 +291,8 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testNext() throws Exception {
-        //******************TEST LISTA VACÍA************************************
-        Iterator<Character> itr = this.listaVacía.iterator();
+        //******************TEST LISTA VACÃ�A************************************
+        Iterator<Character> itr = this.listaVacia.iterator();
         try{
             itr.next();
             fail();
@@ -317,19 +317,18 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testAddToFront() {
-        //******************TEST LISTA VACÍA************************************
-        assertEquals(this.listaVacía.size(), 0);
-        assertNull(this.listaVacía.first());
-        assertNull(this.listaVacía.last());
-        this.listaVacía.addToFront('x');
-        assertEquals(this.listaVacía.size(), 1);
-        assertEquals(this.listaVacía.last(), this.listaVacía.first());
-        assertTrue(this.listaVacía.last().equals('x'));
+        //******************TEST LISTA VACÃ�A************************************
+        assertEquals(this.listaVacia.size(), 0);
+        assertNull(this.listaVacia.first());
+        assertNull(this.listaVacia.last());
+        this.listaVacia.addToFront('x');
+        assertEquals(this.listaVacia.size(), 1);
+        assertEquals(this.listaVacia.last(), this.listaVacia.first());
+        assertTrue(this.listaVacia.last().equals('x'));
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertEquals(this.lista1Elem.last(), this.lista1Elem.first());
         this.lista1Elem.addToFront('x');
         assertEquals(this.lista1Elem.size(), 2);
-        assertFalse(this.lista1Elem.last().equals(this.lista1Elem.first()));
         assertTrue(this.lista1Elem.first().equals('x'));
         assertTrue(this.lista1Elem.last().equals('a'));
         //******************TEST LISTA VARIOS ELEMENTOS*************************
@@ -351,19 +350,18 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testAddToRear() {
-        //******************TEST LISTA VACÍA************************************
-        assertEquals(this.listaVacía.size(), 0);
-        assertNull(this.listaVacía.first());
-        assertNull(this.listaVacía.last());
-        this.listaVacía.addToRear('x');
-        assertEquals(this.listaVacía.size(), 1);
-        assertEquals(this.listaVacía.last(), this.listaVacía.first());
-        assertTrue(this.listaVacía.last().equals('x'));
+        //******************TEST LISTA VACÃ�A************************************
+        assertEquals(this.listaVacia.size(), 0);
+        assertNull(this.listaVacia.first());
+        assertNull(this.listaVacia.last());
+        this.listaVacia.addToRear('x');
+        assertEquals(this.listaVacia.size(), 1);
+        assertEquals(this.listaVacia.last(), this.listaVacia.first());
+        assertTrue(this.listaVacia.last().equals('x'));
         //******************TEST LISTA 1 ELEMENTO*******************************
         assertEquals(this.lista1Elem.last(), this.lista1Elem.first());
         this.lista1Elem.addToRear('x');
         assertEquals(this.lista1Elem.size(), 2);
-        assertFalse(this.lista1Elem.last().equals(this.lista1Elem.first()));
         assertTrue(this.lista1Elem.first().equals('a'));
         assertTrue(this.lista1Elem.last().equals('x'));
         //******************TEST LISTA VARIOS ELEMENTOS*************************
@@ -385,12 +383,12 @@ public class UnorderedCircularLinkedListTest {
 
     @Test
     public void testAddAfter() {
-        //******************TEST LISTA VACÍA************************************
-        assertEquals(this.listaVacía.size(), 0);
-        assertNull(this.listaVacía.first());
-        assertNull(this.listaVacía.last());
+        //******************TEST LISTA VACÃ�A************************************
+        assertEquals(this.listaVacia.size(), 0);
+        assertNull(this.listaVacia.first());
+        assertNull(this.listaVacia.last());
         try{
-            this.listaVacía.addAfter('x', 'a');
+            this.listaVacia.addAfter('x', 'a');
             fail();
         } catch (IllegalArgumentException e){}
         //******************TEST LISTA 1 ELEMENTO*******************************
