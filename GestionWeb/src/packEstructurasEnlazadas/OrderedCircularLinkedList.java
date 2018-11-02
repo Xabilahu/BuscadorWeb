@@ -1,16 +1,16 @@
 package packEstructurasEnlazadas;
 
-public class OrderedCircularLinkedList<T extends Comparable> extends CircularLinkedList<T> implements OrderedListADT<T> {
+public class OrderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements OrderedListADT<T> {
 	
-	  public OrderedCircularLinkedList(){
+	public OrderedCircularLinkedList(){
 	        super();
 	    }
 
-	    public OrderedCircularLinkedList(Node<T> pNode, int pCount, String pDescr){
-	        this.last = pNode;
-	        this.count = pCount;
-	        this.descr = pDescr;
-	    }
+	public OrderedCircularLinkedList(Node<T> pNode, int pCount, String pDescr){
+		this.last = pNode;
+		this.count = pCount;
+		this.descr = pDescr;
+	}
 	
 	public void add(T elem){		
 		Node<T> nuevo = new Node<T>(elem);
@@ -18,16 +18,8 @@ public class OrderedCircularLinkedList<T extends Comparable> extends CircularLin
 			Node<T> actual = last.next;
 			Node<T> anterior = last;
 			boolean added = false;
-			if (actual == last) {
-				nuevo.next = last;
-				last.next = nuevo;
-				if(elem.compareTo(last.data) >= 0) {
-					last = nuevo;
-				}
-				added = true;
-			}
 			while (actual != last && !added) {
-				if (elem.compareTo(actual.data) < 0) {
+				if (elem.compareTo(actual.data) <= 0) {
 					nuevo.next = actual;
 					anterior.next = nuevo;
 					added = true;
@@ -36,7 +28,7 @@ public class OrderedCircularLinkedList<T extends Comparable> extends CircularLin
 				anterior = anterior.next;
 			}
 			if (!added){
-			    if (elem.compareTo(actual.data) < 0){
+			    if (elem.compareTo(actual.data) <= 0){
                     nuevo.next = actual;
                     anterior.next = nuevo;
                 } else {

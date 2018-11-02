@@ -151,10 +151,8 @@ public abstract class CircularLinkedList<T> implements ListADT<T> {
 
            @Override
            public boolean hasNext() {
-               if (last == null || ( primeroPasado && current == last.next)){
-               		return false;
-			   }
-			   return true;
+               if (last == null || ( primeroPasado && current == last.next)) return false;
+               else return true;
            }
 
            @Override
@@ -165,9 +163,7 @@ public abstract class CircularLinkedList<T> implements ListADT<T> {
                    current = current.next;
                    return aux;
                }
-               else{
-                   throw new NoSuchElementException();
-               }
+               else throw new NoSuchElementException();
            }
 
            @Override

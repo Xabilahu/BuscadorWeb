@@ -1,12 +1,10 @@
 package packPruebas;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import packEstructurasEnlazadas.Node;
 import packEstructurasEnlazadas.OrderedCircularLinkedList;
-import packEstructurasEnlazadas.UnorderedCircularLinkedList;
 
 import static org.junit.Assert.*;
 
@@ -21,9 +19,10 @@ public class OrderedCircularLinkedListTest {
 
 	@Before
     public void setUp() throws Exception {
-		a = 2;
-		b = 4;
-		c = 6;
+		a = '2';
+		b = '4';
+		c = '6';
+		x = '1';
         this.listaVacia = new OrderedCircularLinkedList<>();
         Node<Character> elem = new Node<>(a);
         elem.next = elem;
@@ -43,7 +42,6 @@ public class OrderedCircularLinkedListTest {
         assertEquals(this.listaVacia.size(), 0);
         assertNull(this.listaVacia.first());
         assertNull(this.listaVacia.last());
-        x = '1';
         this.listaVacia.add(x);
         assertEquals(this.listaVacia.size(), 1);
         assertEquals(this.listaVacia.last(), this.listaVacia.first());
@@ -95,7 +93,7 @@ public class OrderedCircularLinkedListTest {
 		        assertTrue(itr.next().equals(b));
 		        assertTrue(itr.next().equals(c));
 		        assertTrue(itr.next().equals(x));
-		        assertFalse(itr.hasNext());        	
+		        assertFalse(itr.hasNext());
 	        }
 	        listaVariosElem.remove(x);
         }        	       
