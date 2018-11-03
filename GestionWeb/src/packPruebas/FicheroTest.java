@@ -2,7 +2,7 @@ package packPruebas;
 
 import static org.junit.Assert.*;
 
-import packModelo.Busqueda;
+import packModelo.ListaWebs;
 import packModelo.Fichero;
 
 public class FicheroTest {
@@ -18,8 +18,8 @@ public class FicheroTest {
     @org.junit.Test
     public void testCargarListaWeb() {
         Fichero.getFichero().cargarListaWeb("index.txt","pld-arcs-1-N.txt");
-        assertEquals(Busqueda.getBusqueda().longitud(),2039805);
-        assertEquals(Busqueda.getBusqueda().enlacesSalientes("010-golf.co.jp").get(2),"010bjzs.com");
+        assertEquals(ListaWebs.getListaWebs().longitud(),2039805);
+        assertEquals(ListaWebs.getListaWebs().enlacesSalientes("010-golf.co.jp").get(2),"010bjzs.com");
 
     }
 
