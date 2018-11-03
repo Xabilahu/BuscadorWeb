@@ -1,14 +1,16 @@
 package packModelo;
+import packEstructurasEnlazadas.UnorderedCircularLinkedList;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DiccionarioPC {
 
     private static DiccionarioPC miDiccionarioPC = null;
-    private ArrayList<String> listaPalabras;
+    private UnorderedCircularLinkedList<String> listaPalabras;
 
     private DiccionarioPC(){
-        this.listaPalabras = new ArrayList<String>();
+        this.listaPalabras = new UnorderedCircularLinkedList<>();
     }
 
     public static DiccionarioPC getDiccionarioPC(){
@@ -23,19 +25,11 @@ public class DiccionarioPC {
     }
 
     public void insertarPalabraClave(String pPalabra){
-        this.listaPalabras.add(pPalabra);
+        this.listaPalabras.addToRear(pPalabra);
     }
 
     public boolean existe(String pPalabra){
         return listaPalabras.contains(pPalabra);
-    }
-
-    public int longitud(){
-        return this.listaPalabras.size();//Sólo se usa en FicheroTest
-    }
-
-    public String get(int pIndex){
-        return this.listaPalabras.get(pIndex);//Sólo se usa en FicheroTest
     }
 
     public ArrayList<String> web2Words(String pNombre) {
