@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import packModelo.Grafo;
 import packModelo.ListaWebs;
 import packModelo.Fichero;
 import packModelo.Web;
@@ -145,6 +146,25 @@ public class Sistema {
         return words;
     }
 
+    private static void conectadas(){
+        System.out.print("\nIntroduzca la URL de la web origen: ");
+        Scanner sc = new Scanner(System.in);
+        String url1 = sc.next();
+        System.out.print("Introduzca la URL de la web destino: ");
+        String url2 = sc.next();
+        Stopwatch stp = new Stopwatch();
+        Grafo gf = new Grafo();
+        gf.crearGrafo(ListaWebs.getListaWebs());
+        double metodo1 = stp.elapsedTime();
+        stp = new Stopwatch();
+        boolean resultado = gf.estanConectados(url1, url2);
+        double metodo2 = stp.elapsedTime();
+        if (resultado) System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.");
+        else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.");
+        System.out.println("\nLa ejecucion del metodo crearGrafo() ha tardado " + metodo1 + " segundos.");
+        System.out.println("La ejecucion del metodo estanConectados() ha tardado " + metodo2 + " segundos.\n\n");
+    }
+
     public static void main(String[] args){
     	ArrayList<String> lista;
     	boolean error = false;
@@ -161,7 +181,8 @@ public class Sistema {
 	    			"5. Guardar la lista de webs en ficheros\n" +
 	    			"6. Obtener una lista de paginas web ordenada alfabeticamente\n" +
 	    			"7. Obtener palabras de una pagina web.\n" +
-                    "8. Salir\n\n Opcion: ");
+                    "8. Webs conectadas. \n" +
+                    "9. Salir\n\n Opcion: ");
     		}
             try {
                 opcion = sc.nextInt();
@@ -190,6 +211,9 @@ public class Sistema {
                         if (!primeraVez) buscarPalabras();
                         break;
                     case 8:
+                        if (!primeraVez) conectadas();
+                        break;
+                    case 9:
                         sc.close();
                         System.exit(0);
                     default:
