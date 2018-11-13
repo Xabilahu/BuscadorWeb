@@ -157,11 +157,18 @@ public class Sistema {
         gf.crearGrafo(ListaWebs.getListaWebs());
         double metodo1 = stp.elapsedTime();
         stp = new Stopwatch();
-        boolean resultado = gf.estanConectados(url1, url2);
+        ArrayList<Integer> resultado = gf.estanConectadosCamino(url1, url2);
         double metodo2 = stp.elapsedTime();
-        if (resultado) System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.");
-        else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.");
-        System.out.println("\nLa ejecucion del metodo crearGrafo() ha tardado " + metodo1 + " segundos.");
+        if (resultado.size() > 0) {
+            System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.\n");
+            System.out.print("El camino más corto entre ellas es: ");
+            for(int i : resultado) {
+                if (i != ListaWebs.getListaWebs().string2Id(url2)) System.out.print(ListaWebs.getListaWebs().id2String(i) + " -> ");
+                else System.out.print(ListaWebs.getListaWebs().id2String(i));
+            }
+        }
+        else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.\n");
+        System.out.println("\n\nLa ejecucion del metodo crearGrafo() ha tardado " + metodo1 + " segundos.");
         System.out.println("La ejecucion del metodo estanConectados() ha tardado " + metodo2 + " segundos.\n\n");
     }
 
