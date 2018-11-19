@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Grafo {
 
-    HashMap<String, Integer> th;
-    String[] keys;
-    ArrayList<Integer>[] adjList;
+    private HashMap<String, Integer> th;
+    private String[] keys;
+    private ArrayList<Integer>[] adjList;
 
     public void crearGrafo(ListaWebs lista){
         // Post: crea el grafo desde la lista de webs

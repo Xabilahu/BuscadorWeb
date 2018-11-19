@@ -202,9 +202,8 @@ public class Sistema {
             return opt;
         } catch (InputMismatchException e) {
             System.out.println("\nOpcion incorrecta.");
-            pedirCamino(new Scanner(System.in));
+            return pedirCamino(new Scanner(System.in));
         }
-        return 0;
     }
 
     public static void main(String[] args) {
