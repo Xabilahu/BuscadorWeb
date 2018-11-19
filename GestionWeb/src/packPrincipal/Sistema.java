@@ -146,32 +146,58 @@ public class Sistema {
         return words;
     }
 
-    private static void conectadas(){
-        System.out.print("\nIntroduzca la URL de la web origen: ");
+    private static void conectadas(int pedirCamino){
         Scanner sc = new Scanner(System.in);
+        System.out.print("\nIntroduzca la URL de la web origen: ");
         String url1 = sc.next();
         System.out.print("Introduzca la URL de la web destino: ");
         String url2 = sc.next();
+        int opt;
+        if (pedirCamino == -1) opt = pedirCamino(sc);
+        else opt = pedirCamino;
         Stopwatch stp = new Stopwatch();
         Grafo gf = new Grafo();
         gf.crearGrafo(ListaWebs.getListaWebs());
         double metodo1 = stp.elapsedTime();
-        stp = new Stopwatch();
-        ArrayList<Integer> resultado = gf.estanConectadosCamino(url1, url2);
-        double metodo2 = stp.elapsedTime();
-        if (resultado != null) {
-            if (resultado.size() > 0) {
-                System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.\n");
-                System.out.print("El camino más corto entre ellas es: ");
-                for (int i : resultado) {
-                    if (i != ListaWebs.getListaWebs().string2Id(url2))
-                        System.out.print(ListaWebs.getListaWebs().id2String(i) + " -> ");
-                    else System.out.print(ListaWebs.getListaWebs().id2String(i));
-                }
-            } else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.\n");
+        double metodo2;
+        try {
+            stp = new Stopwatch();
+            if (opt == 1) {
+                ArrayList<Integer> resultado = gf.estanConectadosCamino(url1, url2);
+                metodo2 = stp.elapsedTime();
+                if (resultado.size() > 0) {
+                    System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.\n");
+                    System.out.print("El camino más corto entre ellas es: ");
+                    for (int i : resultado) {
+                        if (i != ListaWebs.getListaWebs().string2Id(url2))
+                            System.out.print(ListaWebs.getListaWebs().id2String(i) + " -> ");
+                        else System.out.print(ListaWebs.getListaWebs().id2String(i));
+                    }
+                } else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.\n");
+            } else {
+                boolean resultado = gf.estanConectados(url1, url2);
+                metodo2 = stp.elapsedTime();
+                if (resultado) System.out.println("\n\nLas webs " + url1 + " y " + url2 + " SI estan conectadas.\n");
+                else System.out.println("\n\nLas webs " + url1 + " y " + url2 + " NO estan conectadas.\n");
+            }
             System.out.println("\n\nLa ejecucion del metodo crearGrafo() ha tardado " + metodo1 + " segundos.");
             System.out.println("La ejecucion del metodo estanConectados() ha tardado " + metodo2 + " segundos.\n\n");
-        } else System.out.println("\n\nAlguna de las webs introducidas no existe.\n\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n\n" + e.getMessage() + "\n\n");
+            conectadas(opt);
+        }
+    }
+
+    private static int pedirCamino(Scanner sc) {
+        System.out.print("\n\n1. Mostrar camino mas corto.\n2. No mostrar camino mas corto.\n\n Opcion: ");
+        try{
+            int opt = sc.nextInt();
+            return opt;
+        } catch (InputMismatchException e) {
+            System.out.println("\nOpcion incorrecta.");
+            pedirCamino(new Scanner(System.in));
+        }
+        return 0;
     }
 
     public static void main(String[] args){
@@ -220,7 +246,7 @@ public class Sistema {
                         if (!primeraVez) buscarPalabras();
                         break;
                     case 8:
-                        if (!primeraVez) conectadas();
+                        if (!primeraVez) conectadas(-1);
                         break;
                     case 9:
                         sc.close();
