@@ -19,6 +19,13 @@ public class Sistema {
         System.out.println("\nLa ejecucion ha tardado " + stp.elapsedTime() + " segundos.\n\n");
     }
 
+    private static void cargarDatosFichero(String pathWeb, String pathEnlac, String pathDicc){
+        Stopwatch stp = new Stopwatch();
+        Fichero.getFichero().cargarListaWeb(pathWeb,pathEnlac);
+        Fichero.getFichero().cargarDiccionarioPC(pathDicc);
+        System.out.println("\nLa ejecucion ha tardado " + stp.elapsedTime() + " segundos.\n\n");
+    }
+
     private static ArrayList<String> buscarWeb(){
         System.out.print("\nInserte la palabra clave de la web que quiera buscar: ");
         Scanner sc = new Scanner(System.in);
@@ -200,68 +207,75 @@ public class Sistema {
         return 0;
     }
 
-    public static void main(String[] args){
-    	ArrayList<String> lista;
-    	boolean error = false;
-    	boolean primeraVez = true;
-    	int opcion;
-        Scanner sc = new Scanner(System.in);
-    	do {
-    		if (!error) {
-    			System.out.print("MENU:\n" +
-	    			"1. Cargar los datos desde los ficheros.\n" +
-	    			"2. Busqueda de una pagina web\n" +
-	    			"3. Insercion de una nueva pagina web\n" +
-	    			"4. Devolver las paginas web enlazadas desde una web dada\n"+
-	    			"5. Guardar la lista de webs en ficheros\n" +
-	    			"6. Obtener una lista de paginas web ordenada alfabeticamente\n" +
-	    			"7. Obtener palabras de una pagina web.\n" +
-                    "8. Webs conectadas. \n" +
-                    "9. Salir\n\n Opcion: ");
-    		}
-            try {
-                opcion = sc.nextInt();
-                error = false;
-                switch (opcion) {
-                    case 1:
-                        if (primeraVez) {cargarDatosFichero(); primeraVez = false;}
-                        else System.out.println("\nLos ficheros fueron cargados con anterioridad.\n");
-                        break;
-                    case 2:
-                        if (!primeraVez) buscarWeb();
-                        break;
-                    case 3:
-                        if (!primeraVez) insertarWeb();
-                        break;
-                    case 4:
-                        if (!primeraVez) devolverEnlaces();
-                        break;
-                    case 5:
-                        if (!primeraVez) guardarEnFichero();
-                        break;
-                    case 6:
-                        if (!primeraVez) listaOrdenadaWebs();
-                        break;
-                    case 7:
-                        if (!primeraVez) buscarPalabras();
-                        break;
-                    case 8:
-                        if (!primeraVez) conectadas(-1);
-                        break;
-                    case 9:
-                        sc.close();
-                        System.exit(0);
-                    default:
-                        System.out.println("Error, introduce una opcion correcta");
-                        error = true;
+    public static void main(String[] args) {
+        if (args.length == 1 && (args[0].equals("-h") || args[0].equals("-help"))) {
+            System.out.println("Sistema \"/path/to/WebFile.txt\" \"/path/to/EnlacesFile.txt\" \"/path/to/DiccionarioFile.txt\"");
+        } else {
+            ArrayList<String> lista;
+            boolean error = false;
+            boolean primeraVez = true;
+            int opcion;
+            Scanner sc = new Scanner(System.in);
+            do {
+                if (!error) {
+                    System.out.print("MENU:\n" +
+                            "1. Cargar los datos desde los ficheros.\n" +
+                            "2. Busqueda de una pagina web\n" +
+                            "3. Insercion de una nueva pagina web\n" +
+                            "4. Devolver las paginas web enlazadas desde una web dada\n" +
+                            "5. Guardar la lista de webs en ficheros\n" +
+                            "6. Obtener una lista de paginas web ordenada alfabeticamente\n" +
+                            "7. Obtener palabras de una pagina web.\n" +
+                            "8. Webs conectadas. \n" +
+                            "9. Salir\n\n Opcion: ");
                 }
-                if (primeraVez) System.out.println("\n\nPrimero debes cargar los datos desde los ficheros.\n\n");
-            } catch (InputMismatchException e){
-                System.out.println("\n\nOpcion incorrecta, vuelva a introducir una opcion.\n\n");
-                sc = new Scanner(System.in);
-            }
-    	}while (true);
+                try {
+                    opcion = sc.nextInt();
+                    error = false;
+                    switch (opcion) {
+                        case 1:
+                            if (primeraVez) {
+                                if (args.length == 0) cargarDatosFichero();
+                                else cargarDatosFichero(args[0], args[1], args[2]);
+                                primeraVez = false;
+                            } else System.out.println("\nLos ficheros fueron cargados con anterioridad.\n");
+                            break;
+                        case 2:
+                            if (!primeraVez) buscarWeb();
+                            break;
+                        case 3:
+                            if (!primeraVez) insertarWeb();
+                            break;
+                        case 4:
+                            if (!primeraVez) devolverEnlaces();
+                            break;
+                        case 5:
+                            if (!primeraVez) guardarEnFichero();
+                            break;
+                        case 6:
+                            if (!primeraVez) listaOrdenadaWebs();
+                            break;
+                        case 7:
+                            if (!primeraVez) buscarPalabras();
+                            break;
+                        case 8:
+                            if (!primeraVez) conectadas(-1);
+                            break;
+                        case 9:
+                            sc.close();
+                            System.exit(0);
+                        default:
+                            System.out.println("Error, introduce una opcion correcta");
+                            error = true;
+                    }
+                    if (primeraVez) System.out.println("\n\nPrimero debes cargar los datos desde los ficheros.\n\n");
+                } catch (InputMismatchException e) {
+                    System.out.println("\n\nOpcion incorrecta, vuelva a introducir una opcion.\n\n");
+                    sc = new Scanner(System.in);
+                }
+            } while (true);
 
+        }
     }
 }
 //TODO implementar funcionalidad añadir webs sin haber cargado los ficheros
