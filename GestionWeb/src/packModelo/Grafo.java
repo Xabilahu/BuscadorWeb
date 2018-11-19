@@ -34,6 +34,18 @@ public class Grafo {
         }
     }
 
+    public HashMap<String,Integer> getTh() {
+        return this.th;
+    }
+
+    public String[] getKeys() {
+        return this.keys;
+    }
+
+    public ArrayList<Integer>[] getAdjList() {
+        return this.adjList;
+    }
+
     public void print(){
         for (int i = 0; i < adjList.length; i++){
             System.out.print("Element: " + i + " " + keys[i] + " --> ");
@@ -74,7 +86,7 @@ public class Grafo {
                 }
             }
             return enc;
-        } return false;
+        } throw new IllegalArgumentException("Alguna web inexistente: " + a1 + " // " + a2);
     }
 
     public ArrayList<Integer> estanConectadosCamino(String a1, String a2) {
@@ -137,7 +149,7 @@ public class Grafo {
                 }
             }
             return resultado;
-        } else return null;
+        } throw new IllegalArgumentException("Alguna web inexistente: " + a1 + " // " + a2);
     }
 
 }
