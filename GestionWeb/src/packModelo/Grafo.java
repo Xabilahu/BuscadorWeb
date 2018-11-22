@@ -4,9 +4,16 @@ import java.util.*;
 
 public class Grafo {
 
+    private static Grafo miGrafo = new Grafo();
     private HashMap<String, Integer> th;
     private String[] keys;
     private ArrayList<Integer>[] adjList;
+
+    private Grafo(){}
+
+    public static Grafo getGrafo(){
+        return miGrafo;
+    }
 
     public void crearGrafo(ListaWebs lista){
         th = new HashMap<String,Integer>(lista.longitud());

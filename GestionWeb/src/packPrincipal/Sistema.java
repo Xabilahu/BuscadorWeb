@@ -163,7 +163,7 @@ public class Sistema {
         if (pedirCamino == -1) opt = pedirCamino(sc);
         else opt = pedirCamino;
         Stopwatch stp = new Stopwatch();
-        Grafo gf = new Grafo();
+        Grafo gf = Grafo.getGrafo();
         gf.crearGrafo(ListaWebs.getListaWebs());
         double metodo1 = stp.elapsedTime();
         double metodo2;
