@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class GrafoTest {
 
-    Grafo gf = new Grafo();
+    Grafo gf = Grafo.getGrafo();
     ListaWebs lista = ListaWebs.getListaWebs();
 
     @BeforeClass
