@@ -2,7 +2,9 @@ package packPruebas;
 
 
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import packModelo.Fichero;
 import packModelo.Grafo;
 import packModelo.ListaWebs;
@@ -15,6 +17,7 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GrafoTest {
 
     Grafo gf = Grafo.getGrafo();
@@ -25,7 +28,7 @@ public class GrafoTest {
         Fichero.getFichero().cargarListaWeb("index.txt", "pld-arcs-1-N.txt");
     }
 
-    @Test
+    @Test()
     public void testCrearGrafo() {
         HashMap<String,Integer> th = this.gf.getTh();
         String[] keys = this.gf.getKeys();
@@ -112,7 +115,7 @@ public class GrafoTest {
 
     @Test
     public void testTiempo() {
-        int numPruebas = 10;
+        int numPruebas = 100;
         this.gf.crearGrafo(this.lista);
         Stopwatch stp = new Stopwatch();
         for (int i = 0; i < numPruebas; i++) {
