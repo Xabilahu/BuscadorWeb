@@ -18,7 +18,11 @@ public class ListaWebs{
     		miListaWebs = new ListaWebs();
 		}
         return miListaWebs;
-    }   
+    }
+
+    public void reset(){
+    	this.listaWebs = new ArrayList<>();
+	}
    
     public Iterator<Web> getIterator(){
     	return listaWebs.iterator();
