@@ -15,22 +15,19 @@ public class Grafo {
         return miGrafo;
     }
 
+    @SuppressWarnings("unchecked")
     public void crearGrafo(ListaWebs lista){
         th = new HashMap<String,Integer>(lista.longitud());
+        keys = new String[lista.longitud()];
+        adjList = (ArrayList<Integer>[]) new ArrayList[lista.longitud()];
         Iterator<Web> itr = lista.getIterator();
         Web wActual;
+
         while (itr.hasNext()) {
             wActual = itr.next();
             th.put(wActual.getNombre(), wActual.getNumero());
-        }
-
-        keys = new String[th.size()];
-        for (String k: th.keySet()) keys[th.get(k)] = k;
-
-        itr = lista.getIterator();
-        adjList = (ArrayList<Integer>[]) new ArrayList[th.size()];
-        for (int i = 0; i < adjList.length; i++) {
-            adjList[i] = itr.next().enlacesSalientes();
+            keys[wActual.getNumero()] = wActual.getNombre();
+            adjList[wActual.getNumero()] = wActual.enlacesSalientes();
         }
     }
 
