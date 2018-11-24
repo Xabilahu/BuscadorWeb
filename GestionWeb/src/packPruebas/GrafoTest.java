@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GrafoTest {
 
-    Grafo gf = Grafo.getGrafo();
-    ListaWebs lista = ListaWebs.getListaWebs();
+    private Grafo gf = Grafo.getGrafo();
+    private ListaWebs lista = ListaWebs.getListaWebs();
 
     @BeforeClass
     public static void setUp() throws Exception {
