@@ -1,6 +1,5 @@
 package packPruebas;
 
-
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -28,7 +27,7 @@ public class GrafoTest {
         Fichero.getFichero().cargarListaWeb("index.txt", "pld-arcs-1-N.txt");
     }
 
-    @Test()
+    @Test
     public void testCrearGrafo() {
         HashMap<String,Integer> th = this.gf.getTh();
         String[] keys = this.gf.getKeys();
@@ -113,15 +112,88 @@ public class GrafoTest {
         assertFalse(itr.hasNext());
     }
 
+    /**
+     * ------------WEB PROPIA--------------
+     *
+     *   w0 --->  w1 --->  w2 ---> w3
+     *   |       ^  |       ^
+     *   |       |  |       |
+     *   |--> w4 -  |--> w5 ---> w6 ---> w7
+     *
+     *
+     *   w8 ---> w9
+     *   |
+     *   |
+     *   |--> w10
+     *
+     *   ----------------------------------
+     */
+
     @Test
-    public void testTiempo() {
+    public void testEstanConectadosWebPropia() {
+        this.lista.reset();
+        Fichero.getFichero().cargarListaWeb("webs.txt", "enlaces.txt");
+        gf.crearGrafo(this.lista);
+        assertTrue(gf.estanConectados("w0", "w1"));
+        assertTrue(gf.estanConectados("w4", "w3"));
+        assertTrue(gf.estanConectados("w4", "w7"));
+        assertFalse(gf.estanConectados("w3", "w7"));
+        assertFalse(gf.estanConectados("w8", "w0"));
+        assertFalse(gf.estanConectados("w0", "w8"));
+        assertTrue(gf.estanConectados("w8", "w10"));
+        assertFalse(gf.estanConectados("w9", "w10"));
+    }
+
+    @Test
+    public void testEstanConectadosWebPropiaCamino(){
+        ArrayList<Integer> camino = gf.estanConectadosCamino("w0", "w1");
+        Iterator<Integer> itr = camino.iterator();
+        assertEquals(itr.next(), (Integer) 0);
+        assertEquals(itr.next(), (Integer) 1);
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w4", "w3");
+        itr = camino.iterator();
+        assertEquals(itr.next(), (Integer) 4);
+        assertEquals(itr.next(), (Integer) 1);
+        assertEquals(itr.next(), (Integer) 2);
+        assertEquals(itr.next(), (Integer) 3);
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w4", "w7");
+        itr = camino.iterator();
+        assertEquals(itr.next(), (Integer) 4);
+        assertEquals(itr.next(), (Integer) 1);
+        assertEquals(itr.next(), (Integer) 5);
+        assertEquals(itr.next(), (Integer) 6);
+        assertEquals(itr.next(), (Integer) 7);
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w3", "w7");
+        itr = camino.iterator();
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w8", "w0");
+        itr = camino.iterator();
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w0", "w8");
+        itr = camino.iterator();
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w8", "w10");
+        itr = camino.iterator();
+        assertEquals(itr.next(), (Integer) 8);
+        assertEquals(itr.next(), (Integer) 10);
+        assertFalse(itr.hasNext());
+        camino = gf.estanConectadosCamino("w9", "w10");
+        itr = camino.iterator();
+        assertFalse(itr.hasNext());
+    }
+
+    @Test
+    public void testDeTiempo() {
         int numPruebas = 100;
         this.gf.crearGrafo(this.lista);
         Stopwatch stp = new Stopwatch();
         for (int i = 0; i < numPruebas; i++) {
-            int id1 = (int) (Math.random() * ListaWebs.getListaWebs().longitud());
-            int id2 = (int) (Math.random() * ListaWebs.getListaWebs().longitud());
-            this.gf.estanConectados(ListaWebs.getListaWebs().id2String(id1), ListaWebs.getListaWebs().id2String(id2));
+            int id1 = (int) (Math.random() * this.lista.longitud());
+            int id2 = (int) (Math.random() * this.lista.longitud());
+            this.gf.estanConectados(this.lista.id2String(id1), this.lista.id2String(id2));
         }
         System.out.println("Tiempo medio de cada prueba: " + (stp.elapsedTime() / numPruebas) + " segundos.");
     }
