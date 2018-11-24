@@ -10,6 +10,7 @@ import packModelo.ListaWebs;
 import packModelo.Web;
 import packTools.Stopwatch;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -132,7 +133,7 @@ public class GrafoTest {
     @Test
     public void testEstanConectadosWebPropia() {
         this.lista.reset();
-        Fichero.getFichero().cargarListaWeb("webs.txt", "enlaces.txt");
+        Fichero.getFichero().cargarListaWeb(System.getProperty("user.dir") + File.separator + "/src/ficherosPrueba/webs.txt", System.getProperty("user.dir") + File.separator + "/src/ficherosPrueba/enlaces.txt");
         gf.crearGrafo(this.lista);
         assertTrue(gf.estanConectados("w0", "w1"));
         assertTrue(gf.estanConectados("w4", "w3"));
