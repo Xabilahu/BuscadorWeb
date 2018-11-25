@@ -122,18 +122,12 @@ public class Grafo {
                 }
 
                 int x = 0;
-                if (resultado.size() % 2 != 0) {
-                    for (int y = resultado.size() - 1; y >= resultado.size() / 2 + 1; y--) {
-                        int temp = resultado.get(x);
-                        resultado.set(x++, resultado.get(y));
-                        resultado.set(y, temp);
-                    }
-                } else {
-                    for (int y = resultado.size() - 1; y >= resultado.size() / 2; y--) {
-                        int temp = resultado.get(x);
-                        resultado.set(x++, resultado.get(y));
-                        resultado.set(y, temp);
-                    }
+                int limite = resultado.size() / 2;
+                if (resultado.size() % 2 != 0) limite += 1;
+                for (int y = resultado.size() - 1; y >= limite; y--) {
+                    int temp = resultado.get(x);
+                    resultado.set(x++, resultado.get(y));
+                    resultado.set(y, temp);
                 }
             }
             return resultado;
