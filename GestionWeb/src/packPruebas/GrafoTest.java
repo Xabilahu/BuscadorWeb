@@ -196,6 +196,8 @@ public class GrafoTest {
             int id2 = (int) (Math.random() * this.lista.longitud());
             this.gf.estanConectados(this.lista.id2String(id1), this.lista.id2String(id2));
         }
-        System.out.println("Tiempo medio de cada prueba: " + (stp.elapsedTime() / numPruebas) + " segundos.");
+        double elapsedTime = stp.elapsedTime();
+        System.out.println("Tiempo medio de cada prueba: " + (elapsedTime / numPruebas) + " segundos.");
+        System.out.println("Tiempo total de ejecución para " + numPruebas + " pruebas: " + elapsedTime + " segundos.");
     }
 }
