@@ -6,11 +6,13 @@ public class Web implements Comparable<Web>{
     private String nombre;
     private int numero;
     private ArrayList<Integer> listaEnlaces;
+    private double pageRank;
 
     public Web(String pNombre, int pNumero, ArrayList<Integer> pListaEnlaces){
         this.nombre = pNombre;
         this.numero = pNumero;
         this.listaEnlaces = pListaEnlaces;
+        this.pageRank = 0.0;
     }
 
     public ArrayList<Integer> enlacesSalientes() {
@@ -23,6 +25,14 @@ public class Web implements Comparable<Web>{
 
     public int getNumero(){
         return this.numero;
+    }
+
+    public void setPageRank(double pr){
+        this.pageRank = pr;
+    }
+
+    public double getPageRank() {
+        return this.pageRank;
     }
 
     @Override
