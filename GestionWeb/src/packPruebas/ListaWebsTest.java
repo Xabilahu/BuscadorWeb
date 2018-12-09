@@ -15,7 +15,7 @@ import packModelo.Fichero;
 import packModelo.Web;
 
 public class ListaWebsTest {
-		
+
 	@BeforeClass
 	public static void setUp() throws Exception {
 		Fichero.getFichero().cargarListaWeb( System.getProperty("user.dir") + File.separator +"index.txt", System.getProperty("user.dir") + File.separator +"pld-arcs-1-N.txt");
