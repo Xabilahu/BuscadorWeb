@@ -65,6 +65,10 @@ public class PageRank {
         return miPageRank;
     }
 
+    public void reset() {
+        miPageRank = new PageRank();
+    }
+
     public HashMap<String,Double> pageRank(){
         return this.pageRankMap;
     }

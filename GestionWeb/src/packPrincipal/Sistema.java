@@ -2,12 +2,10 @@ package packPrincipal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
-import packModelo.Grafo;
-import packModelo.ListaWebs;
-import packModelo.Fichero;
-import packModelo.Web;
+import packModelo.*;
 import packTools.Stopwatch;
 
 public class Sistema {
@@ -206,11 +204,28 @@ public class Sistema {
         }
     }
 
+    private static void busquedaPageRank() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\n\nIntroduzca las palabras clave que quiera buscar: ");
+        String busqueda = sc.nextLine();
+        Stopwatch stp = new Stopwatch();
+        PageRank pg = PageRank.getPageRank();
+        double tiempoCrearPG = stp.elapsedTime();
+        ArrayList<Par> listaWebsBusqueda = pg.buscar(busqueda);
+        System.out.println("\n\nSe han tardado " + tiempoCrearPG + " segundos en calcular todos los PageRank.");
+        System.out.println("Se han tardado " + (stp.elapsedTime() - tiempoCrearPG) + " segundos en hacer la busqueda ordenada por PageRank.\n\n");
+        System.out.println("Se han encontrado " +  listaWebsBusqueda.size() + " webs que coindicen con \"" + busqueda + "\" son las siguientes:\n");
+
+        for (Par p : listaWebsBusqueda)
+            System.out.print(p.getWeb() + " ");
+
+        System.out.println("\n\n");
+    }
+
     public static void main(String[] args) {
         if (args.length == 1 && (args[0].equals("-h") || args[0].equals("-help"))) {
             System.out.println("Sistema \"/path/to/WebFile.txt\" \"/path/to/EnlacesFile.txt\" \"/path/to/DiccionarioFile.txt\"");
         } else {
-            ArrayList<String> lista;
             boolean error = false;
             boolean primeraVez = true;
             int opcion;
@@ -219,14 +234,15 @@ public class Sistema {
                 if (!error) {
                     System.out.print("MENU:\n" +
                             "1. Cargar los datos desde los ficheros.\n" +
-                            "2. Busqueda de una pagina web\n" +
-                            "3. Insercion de una nueva pagina web\n" +
-                            "4. Devolver las paginas web enlazadas desde una web dada\n" +
-                            "5. Guardar la lista de webs en ficheros\n" +
-                            "6. Obtener una lista de paginas web ordenada alfabeticamente\n" +
+                            "2. Busqueda de una pagina web.\n" +
+                            "3. Insercion de una nueva pagina web.\n" +
+                            "4. Devolver las paginas web enlazadas desde una web dada.\n" +
+                            "5. Guardar la lista de webs en ficheros.\n" +
+                            "6. Obtener una lista de paginas web ordenada alfabeticamente.\n" +
                             "7. Obtener palabras de una pagina web.\n" +
-                            "8. Webs conectadas. \n" +
-                            "9. Salir\n\n Opcion: ");
+                            "8. Webs conectadas.\n" +
+                            "9. Busqueda de una pagina web ordenada por PageRank.\n" +
+                            "10. Salir\n\n Opcion: ");
                 }
                 try {
                     opcion = sc.nextInt();
@@ -261,6 +277,9 @@ public class Sistema {
                             if (!primeraVez) conectadas(-1);
                             break;
                         case 9:
+                            if (!primeraVez) busquedaPageRank();
+                            break;
+                        case 10:
                             sc.close();
                             System.exit(0);
                         default:

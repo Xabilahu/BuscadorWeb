@@ -12,7 +12,8 @@ public class Par implements Comparable<Par> {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
+        if (this == o) return true;
+        else if (o == null || !(o instanceof Par)) return false;
         Par ob = (Par) o;
         return this.web.equals(ob.web) && Double.compare(this.pageRank, ob.pageRank) == 0;
     }
@@ -25,4 +26,12 @@ public class Par implements Comparable<Par> {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return this.web + " -> " + this.pageRank;
+    }
+
+    public String getWeb() {
+        return this.web;
+    }
 }
