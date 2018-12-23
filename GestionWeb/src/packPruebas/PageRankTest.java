@@ -77,7 +77,7 @@ public class PageRankTest {
         pg = PageRank.getPageRank();
         double timePageRank = stp.elapsedTime();
 
-        Iterable<Par> search = pg.buscar("face");
+        Iterable<Par> search = pg.buscar("book");
         System.out.println("Tiempo transcurrido en generar los PageRank: " + timePageRank + " segundos.");
         System.out.println("Tiempo transcurrido en hacer la busqueda por PageRank de \"book\": " + (stp.elapsedTime() - timePageRank) + " segundos.\n\n\n");
 
