@@ -8,14 +8,14 @@ import packTools.SortAndSearch;
 
 public class PageRank {
 
-    private HashMap<String, Double> pageRankMap;
+    private final HashMap<String, Double> PAGERANKMAP;
     private static PageRank miPageRank = new PageRank();
     private static final double DAMPING_FACTOR = 0.85;
     private static final double DIFF = 0.0001;
 
     private PageRank() {
         ListaWebs listaWebs = ListaWebs.getListaWebs();
-        this.pageRankMap = new HashMap<>();
+        this.PAGERANKMAP = new HashMap<>();
         int numWebs = listaWebs.longitud();
         double[] nextPageRank = new double[numWebs];
         Iterator<Web> itr = listaWebs.getIterator();
@@ -25,7 +25,7 @@ public class PageRank {
 
         while(itr.hasNext()) {
             wActual = itr.next();
-            wActual.setPageRank(1/numWebs);
+            wActual.setPageRank(1.0/numWebs);
             nextPageRank[index++] = eqFirstArg;
         }
 
@@ -56,7 +56,7 @@ public class PageRank {
         itr = listaWebs.getIterator();
         while (itr.hasNext()) {
             wActual = itr.next();
-            this.pageRankMap.put(wActual.getNombre(), wActual.getPageRank());
+            this.PAGERANKMAP.put(wActual.getNombre(), wActual.getPageRank());
         }
 
     }
@@ -70,16 +70,18 @@ public class PageRank {
     }
 
     public HashMap<String,Double> pageRank(){
-        return this.pageRankMap;
+        return this.PAGERANKMAP;
     }
 
     public ArrayList<Par> buscar(String palabraClave) {
         ArrayList<String> websPalabra = ListaWebs.getListaWebs().word2Webs(palabraClave);
+        if (websPalabra == null) return null;
         return this.calcularParesOrdenar(websPalabra);
     }
 
     public ArrayList<Par> buscar(String palabraClave1, String palabraClave2) {
         ArrayList<String> websPalabra = ListaWebs.getListaWebs().word2Webs(palabraClave1 + " " + palabraClave2);
+        if (websPalabra == null) return null;
         return this.calcularParesOrdenar(websPalabra);
     }
 
@@ -89,7 +91,7 @@ public class PageRank {
 
         while (itr.hasNext()) {
             String wActual = itr.next();
-            Par pActual = new Par(wActual, this.pageRankMap.get(wActual));
+            Par pActual = new Par(wActual, this.PAGERANKMAP.get(wActual));
             pares.add(pActual);
         }
 

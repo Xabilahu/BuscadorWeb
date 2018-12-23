@@ -77,12 +77,15 @@ public class PageRankTest {
         pg = PageRank.getPageRank();
         double timePageRank = stp.elapsedTime();
 
-        Iterable<Par> search = pg.buscar("book");
+        Iterable<Par> search = pg.buscar("face");
         System.out.println("Tiempo transcurrido en generar los PageRank: " + timePageRank + " segundos.");
         System.out.println("Tiempo transcurrido en hacer la busqueda por PageRank de \"book\": " + (stp.elapsedTime() - timePageRank) + " segundos.\n\n\n");
 
-        for (Par p : search) {
-            System.out.println(p.toString());
+        if (search == null) System.out.println("No se ha encontrado ninguna web en la busqueda o la palabra introducida no existe en el diccionario.");
+        else {
+            for (Par p : search) {
+                System.out.println(p.toString());
+            }
         }
     }
 
